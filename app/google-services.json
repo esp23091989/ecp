@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "922396482191",
+    "firebase_url": "https://cabinet-1491977646136.firebaseio.com",
+    "project_id": "cabinet-1491977646136",
+    "storage_bucket": "cabinet-1491977646136.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922396482191:android:d62ae05a565db199",
+        "android_client_info": {
+          "package_name": "com.ibis.ibisecp2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922396482191-mtggktbblcj8urg49btt37au6pn0tg8c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkPGAT54S4MZDm8adiJdQJIg3AMHbuGOM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
