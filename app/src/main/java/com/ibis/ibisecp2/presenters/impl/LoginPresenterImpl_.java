@@ -7,7 +7,7 @@ import com.ibis.ibisecp2.ui.view.LoginView_;
 
 import javax.inject.Inject;
 
-public class LoginPresenterImpl_ extends BasePresenter<LoginView_> implements LoginPresenter_{
+public class LoginPresenterImpl_ extends LoginPresenter_{
 
     private final Navigator navigator;
 

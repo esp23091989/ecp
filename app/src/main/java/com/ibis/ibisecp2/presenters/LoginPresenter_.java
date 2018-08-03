@@ -1,5 +1,7 @@
 package com.ibis.ibisecp2.presenters;
 
-public interface LoginPresenter_ {
-    void onStart();
+import com.ibis.ibisecp2.ui.view.LoginView_;
+
+public abstract class LoginPresenter_ extends BasePresenter<LoginView_> {
+    public abstract void onStart();
 }

@@ -17,6 +17,7 @@ import com.ibis.ibisecp2.ui.fragment.FavoritesDoctorsFragment;
 import com.ibis.ibisecp2.ui.fragment.FreeTimeFragment;
 import com.ibis.ibisecp2.ui.fragment.ListPatientFragment;
 import com.ibis.ibisecp2.ui.fragment.LocationFragment;
+import com.ibis.ibisecp2.ui.fragment.LoginByEsiaFragment;
 import com.ibis.ibisecp2.ui.fragment.LoginFragment;
 import com.ibis.ibisecp2.ui.fragment.RecipeFragment;
 import com.ibis.ibisecp2.ui.fragment.RemembersFragment;
@@ -80,4 +81,6 @@ public interface FragmentComponent {
     void inject(LocationFragment locationFragment);
 
     void inject(FavoritesDoctorsFragment favoritesDoctorsFragment);
+
+    void inject(LoginByEsiaFragment loginByEsiaFragment);
 }

@@ -34,6 +34,7 @@ public class LoginActivity extends BaseActivity implements LoginView_ {
         setSupportActionBar(toolbar);
         setTitle("Вход");
 
+        presenter.attachView(this);
         presenter.onStart();
     }
 
@@ -50,5 +51,11 @@ public class LoginActivity extends BaseActivity implements LoginView_ {
     @Override
     public void hideLoad() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        presenter.detachView();
+        super.onDestroy();
     }
 }

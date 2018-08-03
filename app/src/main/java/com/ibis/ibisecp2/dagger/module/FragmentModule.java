@@ -15,6 +15,7 @@ import com.ibis.ibisecp2.presenters.FavoritesDoctorsPresenter;
 import com.ibis.ibisecp2.presenters.HistoryPresenter;
 import com.ibis.ibisecp2.presenters.ListPatientPresenter;
 import com.ibis.ibisecp2.presenters.LocationPresenter;
+import com.ibis.ibisecp2.presenters.LoginByEsiaPresenter;
 import com.ibis.ibisecp2.presenters.LoginPresenter;
 import com.ibis.ibisecp2.presenters.RecipePresenter;
 import com.ibis.ibisecp2.presenters.RemembersPresenter;
@@ -36,6 +37,7 @@ import com.ibis.ibisecp2.presenters.impl.FavoritesDoctorsPresenterImpl;
 import com.ibis.ibisecp2.presenters.impl.HistoryPresenterImpl;
 import com.ibis.ibisecp2.presenters.impl.ListPatientPresenterImpl;
 import com.ibis.ibisecp2.presenters.impl.LocationPresenterImpl;
+import com.ibis.ibisecp2.presenters.impl.LoginByEsiaPresenterImpl;
 import com.ibis.ibisecp2.presenters.impl.LoginPresenterImpl;
 import com.ibis.ibisecp2.presenters.impl.RecipePresenterImpl;
 import com.ibis.ibisecp2.presenters.impl.RemembersPresenterImpl;
@@ -110,6 +112,12 @@ public class FragmentModule {
     @Provides
     @PerFragment
     LoginPresenter provideLoginPresenter(LoginPresenterImpl presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerFragment
+    LoginByEsiaPresenter provideLoginByEsiaPresenter(LoginByEsiaPresenterImpl presenter){
         return presenter;
     }
 
