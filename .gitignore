@@ -68,4 +68,6 @@ fastlane/readme.md
 
 # custom files
 .DS_Store
+.idea
+
 
