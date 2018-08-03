@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <include layout="@layout/toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include
+        layout="@layout/progress_layout"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <EditText
+        android:id="@+id/editTextDiaryNewRecordContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewDiaryNewRecordTitle"
+        android:layout_marginLeft="@dimen/spacing_major"
+        android:layout_marginRight="@dimen/spacing_major"
+        android:layout_marginTop="@dimen/spacing_major"
+        android:background="@drawable/white_rounded_edit_text"
+        android:hint="@string/title.diary.record.add.text"
+        android:inputType="textMultiLine"
+        android:padding="@dimen/small_edittext_padding"
+        android:textColor="@color/black"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</android.support.design.widget.CoordinatorLayout>

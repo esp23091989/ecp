@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_dept_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:gravity="center_vertical"
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:text="deptName"
+        android:textColor="@color/textSecondaryPrimary"
+        android:textSize="15sp"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/tv_dept_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:gravity="center_vertical"
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:text="адрес"
+        android:textColor="@color/textSecondaryPrimary"
+        android:textSize="15sp"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/tv_dept_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:gravity="center_vertical"
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:text="deptPhone"
+        android:textColor="@color/textSecondaryPrimary"
+        android:textSize="15sp"
+        android:typeface="sans" />
+
+    <View
+        android:id="@+id/bottom_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey" />
+
+</LinearLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_img"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_major">
+
+    <TextView
+        android:id="@+id/departmentTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:drawableLeft="@drawable/prilozhenie"
+        android:drawablePadding="@dimen/spacing_medium"
+        android:gravity="center_vertical"
+        android:text="@string/title.department"
+        android:textColor="@color/white"
+        android:textSize="@dimen/header_department_font_size"
+        android:typeface="sans" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/spacing_minor"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/spacing_major"
+            android:src="@drawable/tel_white_3" />
+
+        <Button
+            android:id="@+id/buttonLogin"
+            style="@style/style_button"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignBottom="@+id/fab"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="@dimen/spacing_major"
+            android:text="Вход" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@drawable/ic_information_outline_white_48dp" />
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:layout_alignRight="@+id/linearLayout"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:background="@color/white"
+        android:popupBackground="@drawable/rounded_corner" />
+
+</RelativeLayout>

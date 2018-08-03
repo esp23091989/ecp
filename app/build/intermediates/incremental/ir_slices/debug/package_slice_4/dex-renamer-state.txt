@@ -1,0 +1,4 @@
+#Thu Aug 02 23:42:04 MSK 2018
+base.0=/Users/esp/misc/ecp/app/build/intermediates/transforms/dexMerger/debug/4
+path.0=classes.dex
+renamed.0=classes.dex

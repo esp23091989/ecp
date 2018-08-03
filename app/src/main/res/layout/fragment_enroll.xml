@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/svAppointmentApprove"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rounded_corner"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvDepartmentTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/spacing_medium"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewApproveClinic"
+                        style="@style/style_text_view_appointment"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:text="@string/title.appointment.lpu"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewApproveClinicName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textSecondaryPrimary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvDepTitle"
+                        style="@style/style_text_view_appointment"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:text="@string/title.appointment.dep"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvDepName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textSecondaryPrimary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvSpecTitle"
+                        style="@style/style_text_view_appointment"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:text="@string/title.appointment.spec"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvSpecName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textSecondaryPrimary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/textViewApproveDoctorTitle"
+                        style="@style/style_text_view_appointment"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:text="@string/title.appointment.doctor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewApproveDoctorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textSecondaryPrimary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/textViewApproveDateTitle"
+                        style="@style/style_text_view_appointment"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:text="@string/title.appointment.date"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewApproveDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textSecondaryPrimary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/textViewApproveTimeTitle"
+                        style="@style/style_text_view_appointment"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:text="@string/title.appointment.time"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewApproveTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textSecondaryPrimary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvSlotTypeTitle"
+                        style="@style/style_text_view_appointment"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:text="Тип приема:"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvSlotType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textSecondaryPrimary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvNoteTitle"
+                        style="@style/style_text_view_appointment"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:text="Примечание:"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvNote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textSecondaryPrimary"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/buttonOkApprove"
+                style="@style/style_button"
+                android:layout_marginLeft="@dimen/spacing_major"
+                android:layout_marginRight="@dimen/spacing_major"
+                android:layout_marginTop="10dp"
+                android:text="@string/title.appointment.apply" />
+
+            <Button
+                android:id="@+id/buttonCancelApprove"
+                style="@style/style_button"
+                android:layout_marginLeft="@dimen/spacing_major"
+                android:layout_marginRight="@dimen/spacing_major"
+                android:layout_marginTop="@dimen/vertical_button_margin"
+                android:text="@string/title.appointment.reject" />
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

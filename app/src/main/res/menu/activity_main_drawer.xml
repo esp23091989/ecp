@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_appointment"
+            android:icon="@drawable/ic_stethoscope_black_24dp"
+            android:title="Запись на прием" />
+        <item
+            android:id="@+id/nav_cartulary"
+            android:icon="@drawable/ic_book_open_black_24dp"
+            android:title="Журнал записей" />
+        <item
+            android:id="@+id/nav_diary"
+            android:icon="@drawable/ic_receipt_black_36dp"
+            android:title="Дневник пациента" />
+        <item
+            android:id="@+id/nav_my_services"
+            android:icon="@drawable/ic_content_paste_black_36dp"
+            android:title="Оказанные услуги" />
+
+        <item
+            android:id="@+id/nav_find_medicament"
+            android:icon="@drawable/ic_clipboard_plus_black_24dp"
+            android:title="Реестр цен на ЖНВЛП" />
+
+        <item
+            android:id="@+id/nav_call"
+            android:icon="@drawable/ic_phone_black_24dp"
+            android:title="Вызов" />
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_account_box_black_36dp"
+            android:title="Мой профиль" />
+        <item
+            android:id="@+id/nav_rate"
+            android:icon="@drawable/ic_stars_black_36dp"
+            android:title="Оценить приложение" />
+        <item
+            android:id="@+id/nav_setup"
+            android:icon="@drawable/ic_settings_black_36dp"
+            android:title="Настройки уведомлений" />
+
+        <item
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ic_information_outline_white_48dp"
+            android:title="Справка" />
+    </group>
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+        <!--<item android:id="@+id/nav_settings"-->
+        <!--android:title="Нстройки" />-->
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
+            android:title="Сменить пользователя" />
+    </group>
+
+</menu>

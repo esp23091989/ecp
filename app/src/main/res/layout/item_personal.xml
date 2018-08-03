@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/spacing_major">
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvSubscription"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/tvSubscription"
+        android:layout_marginTop="@dimen/spacing_major"
+        android:paddingLeft="15dp"
+        android:text="8888888888"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignBottom="@+id/tvSubscription"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/spacing_major"
+        android:layout_marginTop="@dimen/spacing_major"
+        android:src="@drawable/ic_call_black_36dp" />
+
+    <TextView
+        android:id="@+id/tvSubscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvName"
+        android:layout_toEndOf="@+id/ivIcon"
+        android:layout_toRightOf="@+id/ivIcon"
+        android:paddingLeft="15dp"
+        android:text="телефон"
+        android:textSize="12sp" />
+
+</RelativeLayout>

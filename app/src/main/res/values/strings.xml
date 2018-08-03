@@ -1,0 +1,170 @@
+<resources>
+    <string name="app_name">ЭКП</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Настройки</string>
+
+    <string name="authorize.snils">СНИЛС</string>
+    <string name="authorize.password">пароль</string>
+    <string name="authorize.code">Код</string>
+    <string name="authorize.email">Email</string>
+    <string name="authorize.mobile">Мобильный телефон</string>
+    <string name="button.login">Войти</string>
+
+    <string name="title.department">ДЕПАРТАМЕНТ ЗДРАВООХРАНЕНИЯ"\n"Ханты-Мансийского автономного округа - Югры</string>
+    <string name="title.region">Ханты-Мансийского автономного округа - Югры</string>
+    <string name="title.authorize">Авторизация</string>
+    <string name="title.registration">регистрация</string>
+    <string name="title.clear">Очистить</string>
+    <string name="title.send">Отправить</string>
+    <string name="title.new">Добавить новый</string>
+    <string name="title.reject">Отменить</string>
+    <string name="title.save">Сохранить</string>
+    <string name="title.apply">Применить</string>
+    <string name="title.update">Обновить</string>
+
+    <string name="title.appointment">Запись на прием к врачу</string>
+    <string name="title.appointment.lpu">Выбранное МО: </string>
+    <string name="title.appointment.doctor">Специалист: </string>
+    <string name="title.appointment.dep">Отделение: </string>
+    <string name="title.appointment.spec">Специальность: </string>
+    <string name="title.appointment.date">День приема: </string>
+    <string name="title.appointment.time">Время приема: </string>
+    <string name="title.appointment.apply">Подтвердить запись</string>
+    <string name="title.appointment.reject">Отказаться от записи</string>
+    <string name="title.appointment.tickets">Список всех талонов</string>
+    <string name="title.appointment.choose.city">Выбрать город</string>
+    <string name="title.appointment.choose.time">Выбор времени приема</string>
+    <string name="title.location">Мое местоположение</string>
+
+
+    <string name="title.my.profile">Мой профиль</string>
+
+    <string name="title.service.rendered">Оказанные услуги</string>
+
+    <string name="title.my.recipe">Мои рецепты</string>
+
+    <string name="title.diary">Дневник пациента</string>
+    <string name="title.diary.record">Запись:</string>
+    <string name="title.diary.record.date">Дата:</string>
+    <string name="title.diary.record.add.record">Добавить запись</string>
+    <string name="title.diary.record.add.text">введите текст...</string>
+    <string name="title.diary.no.data">У Вас отсутствуют записи</string>
+    <string name="title.diary.add.new.record">Добавить новую</string>
+    <string name="title.diary.add.new.period">Сохранить период</string>
+    <string name="title.diary.edit.record">Редактировать запись</string>
+    <string name="title.diary.input.text">Введите текст</string>
+
+    <string name="title.recipe.doctor">Название МО:</string>
+    <string name="title.recipe.date">Дата и время приема:</string>
+
+    <string name="title.medicament.find">Реестр цен на ЖНВЛП</string>
+    <string name="title.medicament.hint"><![CDATA[Введите название препарата <font color=\"#FF0000\">*</font>]]></string>
+    <string name="title.medicament.by.request">по запросу найдено</string>
+    <string name="title.medicament.by.price">(цена в руб. </string>
+    <string name="medicament.find">Найти</string>
+    <string name="medicament.rubles">руб.</string>
+    <string name="medicament.separator">|</string>
+    <string name="medicament.closing.bracket">)</string>
+
+
+    <string name="error.message.network">Отсутствует подключение к Интернету</string>
+    <string name="error.message.service">Истекло время ожидания ответа</string>
+    <string name="error.message.call">"Ошибка при выполнении звонка "</string>
+
+
+    <string name="lpu.loading">Загрузка мед. учереждений</string>
+    <string name="lpu.choose">Выберите мед. учереждение</string>
+    <string name="call">Вызов</string>
+    <string name="city.choose">Выбор города</string>
+    <string name="clinic.choose">Выбор больницы</string>
+
+    <string name="free.time">свободное время: </string>
+    <string name="free.time.has">есть</string>
+
+    <string name="remember">Запомнить меня</string>
+    <string name="loading">Загрузка...</string>
+
+    <string name="diary.tab.records">записи</string>
+    <string name="diary.tab.remembers">действующие</string>
+    <string name="diary.tab.history">прошедшие</string>
+    <string name="title.choose.city">Населенный пункт</string>
+    <string name="title.choose.clinic">Выбор больницы</string>
+    <string name="title.shedule">Расписание</string>
+    <string name="title.choose.doctor">Выбор доктора</string>
+    <string name="title.choose.department">Выбор отделения</string>
+    <string name="title.choose.spec">Выбор специальности</string>
+    <string name="title.list.empty">Список пуст</string>
+    <string name="title.cartulary">Журнал записей</string>
+
+    <string-array name="main_items">
+        <item>@string/title.appointment</item>
+        <item>@string/title.cartulary</item>
+        <item>@string/title.diary</item>
+        <item>@string/title.medicament.find</item>
+        <item>@string/call</item>
+    </string-array>
+
+    <string-array name="reminder_time">
+        <item>15 минут</item>
+        <item>30 минут</item>
+        <item>45 минут</item>
+        <item>1 час</item>
+        <item>2 часа</item>
+        <item>3 часа</item>
+        <item>12 часов</item>
+        <item>24 часа</item>
+        <item>2 дня</item>
+        <item>1 неделя</item>
+    </string-array>
+
+    <plurals name="plurals_medicament">
+        <item quantity="zero">препаратов</item>
+        <item quantity="one">%1$d препарат</item>
+        <item quantity="two">%1$d препарата</item>
+        <item quantity="few">%1$d препарата</item>
+        <item quantity="many">%1$d препаратов</item>
+        <item quantity="other">%1$d препаратов</item>
+    </plurals>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title.reception">Прием у врача</string>
+    <string name="title_activity_appointment">AppointmentActiv</string>
+    <string name="msg.error.permission.call">Вы запретили приложению совершать вызовы. Чтобы изменить разрешения перейдите в Настройки -> Приложения -> ЕКП -> Разрешения.</string>
+    <string name="msg.error.permission.location">Вы запретили приложению определять местоположение. Чтобы изменить разрешения перейдите в Настройки -> Приложения -> ЕКП -> Разрешения.</string>
+    <string name="msg.error.permission.calendar">Вы запретили приложению использовать каледарь. Чтобы изменить разрешения перейдите в Настройки -> Приложения -> ЕКП -> Разрешения.</string>
+    <string name="gos.services">gosuslugi</string>
+    <string name="title.choose.doctors">Выбор врача</string>
+    <string name="title.choose.doctors.favorites">Избранные врачи</string>
+    <string name="title.choose.hospital">Выбор больницы</string>
+    <string name="title.choose.near.me.hospital">Ближайшие больницы</string>
+    <string name="title.search.department">Поиск отделения</string>
+    <string name="title.search.city">Поиск населенного пункта</string>
+    <string name="title.search.clinic">Поиск больницы</string>
+    <string name="title.search.speciality">Поиск специальности</string>
+    <string name="title.search.doctors">Поиск врача</string>
+    <string name="title.add.record.diary">Добавить запись</string>
+    <string name="info_medicament">Реестр предельных отпускных розничных цен Ханты-Мансийского автономного округа-Югры, на лекарственные препараты, включенные в перечень жизненно необходимых и важнейших лекарственных препаратов.</string>
+    <string name="info_medicament_important">Важно знать! Стоимость ЖНВЛП в аптеках региона не должна быть больше предельной цены из Реестра ЖНВЛП.</string>
+    <string name="txt_mo">Мед. организация</string>
+    <string name="txt_fer">Федеральная регистратура</string>
+    <string name="txt_cite_mo">Сайт мед. организации</string>
+    <string name="txt_terminal">Терминал</string>
+    <string name="txt_mobile_app">Мобильное приложение</string>
+    <string name="error_message_500">Что-то сломалось. Обычно это временная ошибка, например, в ситуации с высокой нагрузкой или когда у конечной точки временно возникают проблемы. Попробуйте позже.</string>
+    <string name="error_message_502">Сервер не работает или обновляется. Попробуйте позже.</string>
+    <string name="error_message_503">Сервер перегружен запросами. Попробуйте позже.</string>
+    <string name="error_message_504">Сервер работает, но запрос не может обслуживаться из-за некоторого сбоя во внутреннем стеке. Попробуйте позже.</string>
+    <string name="error_message_409">Запрос не может быть выполнен из-за конфликтного обращения к ресурсу</string>
+    <string name="error_message_404">Конечная точка не найдена. Попробуйте позже.</string>
+
+
+    <string-array name="urls">
+        <item></item>
+        <item>http://192.168.1.170:8080/IbisECPService/</item>
+        <item>https://ecp-test.oblteh.ru</item>
+        <item>https://ecp-test.miacugra.ru</item>
+        <item>https://ecp.miacugra.ru</item>
+    </string-array>
+
+</resources>
