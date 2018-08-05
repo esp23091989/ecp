@@ -99,6 +99,8 @@ dependencies {
     // Dagger core dependencies
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     implementation 'com.google.dagger:dagger:2.11'
+    implementation 'com.github.castorflex.smoothprogressbar:library:1.0.0'
+
 }
 
 apply plugin: 'jacoco'

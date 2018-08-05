@@ -5,4 +5,8 @@ package com.ibis.ibisecp2.ui.view;
  */
 
 public interface LoginByEsiaView {
+
+    void showWebLoading();
+
+    void hideWebLoading();
 }

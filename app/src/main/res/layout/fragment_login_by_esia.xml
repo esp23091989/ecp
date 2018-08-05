@@ -3,11 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.fragment.LoginByEsiaFragment">
 
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <ProgressBar
+        android:id="@+id/pb_web"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ProgressBar.Horizontal"
+        android:layout_marginBottom="-8dp"
+        android:layout_marginTop="-7dp"
+        android:padding="0dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        />
 
 </FrameLayout>

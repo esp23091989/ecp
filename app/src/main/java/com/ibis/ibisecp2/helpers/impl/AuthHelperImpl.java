@@ -18,6 +18,7 @@ public class AuthHelperImpl implements AuthHelper {
 
     private RxUtil rxUtil;
     private EcpAp api;
+//    private EisaApi eisaApi;
     private EncryptUtils encryptUtils;
 
     @Inject

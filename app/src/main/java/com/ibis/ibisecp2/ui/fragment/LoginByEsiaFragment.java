@@ -2,10 +2,12 @@ package com.ibis.ibisecp2.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 
 import com.ibis.ibisecp2.R;
 import com.ibis.ibisecp2.dagger.component.FragmentComponent;
@@ -28,13 +30,14 @@ public class LoginByEsiaFragment extends BaseFragment implements LoginByEsiaView
 
     @BindView(R.id.webView)
     WebView webView;
+    @BindView(R.id.pb_web)
+    ProgressBar progressBar;
 
     @Inject
     LoginByEsiaPresenter presenter;
 
     @Inject
     ProgressDialogHelper progressDialogHelper;
-
 
     public static LoginByEsiaFragment newInstance() {
         return new LoginByEsiaFragment();
@@ -54,17 +57,18 @@ public class LoginByEsiaFragment extends BaseFragment implements LoginByEsiaView
         AuthenticatingWebView authenticatingWebView = new AuthenticatingWebView(webView, new AuthenticatingWebViewCallbackMethods() {
             @Override
             public void startProgressDialog() {
-                progressDialogHelper.showDialog();
+                showWebLoading();
             }
 
             @Override
             public void stopProgressDialog() {
-                progressDialogHelper.hideDialog();
+                hideWebLoading();
             }
 
             @Override
-            public void displayResults(EsiaTokenMarker dataDTO) {
-
+            public void displayResults(EsiaTokenMarker marker) {
+//                presenter.getPatient(marker);
+                Log.d("","");
             }
         });
         authenticatingWebView.makeRequest(URL_ESIA);
@@ -72,9 +76,18 @@ public class LoginByEsiaFragment extends BaseFragment implements LoginByEsiaView
     }
 
 
-
     @Override
     void doInjection(FragmentComponent fragmentComponent) {
         fragmentComponent.inject(this);
+    }
+
+    @Override
+    public void showWebLoading() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideWebLoading() {
+        progressBar.setVisibility(View.GONE);
     }
 }
