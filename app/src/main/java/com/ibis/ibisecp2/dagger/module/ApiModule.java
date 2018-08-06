@@ -4,12 +4,15 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.ibis.ibisecp2.BuildConfig;
+import com.ibis.ibisecp2.model.EsiaTokenMarker;
 import com.ibis.ibisecp2.retrofit.ApiEsia;
 import com.ibis.ibisecp2.retrofit.EcpAp;
+import com.ibis.ibisecp2.retrofit.EsiaApi;
 import com.ibis.ibisecp2.retrofit.MedvedApi;
 import com.ibis.ibisecp2.retrofit.TLSSocketFactory;
 import com.ibis.ibisecp2.utils.SharedPreferencesUtils;
 
+import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
@@ -28,7 +31,10 @@ import javax.net.ssl.X509TrustManager;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -48,6 +54,7 @@ public class ApiModule {
     private static final String BASE_URL_TEST = "http://95.174.103.205:18000/";
     private static final String BASE_URL_TESTS = "https://ecp-test.oblteh.ru/";
     private static final String BASE_URL_MIAC = "https://ecp-test.miacugra.ru/";
+    private static final String BASE_URL_ESIA = "https://esia-portal1.test.gosuslugi.ru/";
 
     @Provides
     @Singleton
@@ -63,6 +70,28 @@ public class ApiModule {
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .build();
+    }
+
+    @Provides
+    @Singleton
+    @Inject
+    @Named("EsiaOkHttpClient")
+    public OkHttpClient provideEsiaOkHttpClient(SharedPreferencesUtils sharedPreferencesUtils){
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        EsiaTokenMarker esiaTokenMarker = sharedPreferencesUtils.getEsiaMarker();
+        clientBuilder.addNetworkInterceptor(interceptor);
+        clientBuilder.addInterceptor(chain -> {
+            Request request = chain.request();
+
+            Request.Builder requestBuilder = request.newBuilder()
+                    .header("Authorization", "Bearer " + esiaTokenMarker.getAccessToken());
+            return chain.proceed(requestBuilder.build());
+        });
+
+        return clientBuilder.build();
     }
 
     @Provides
@@ -132,6 +161,14 @@ public class ApiModule {
     @Provides
     @Singleton
     @Inject
+    @Named("EsiaRetrofitClient")
+    public Retrofit provideEsiaRetrofit(@Named("EsiaOkHttpClient") OkHttpClient okHttpClient){
+        return getRetrofit(okHttpClient, BASE_URL_ESIA);
+    }
+
+    @Provides
+    @Singleton
+    @Inject
     @Named("MedvedClient")
     public Retrofit provideMedvedRetrofit(@Named("OkHttpClient") OkHttpClient okHttpClient) {
         return getRetrofit(okHttpClient, BASE_URL_MEDVED);
@@ -186,6 +223,13 @@ public class ApiModule {
     @Inject
     public EcpAp provideEcpAp(@Named("EcpClient") Retrofit adapter) {
         return adapter.create(EcpAp.class);
+    }
+
+    @Provides
+    @Singleton
+    @Inject
+    public EsiaApi provideEsiaApi(@Named("EsiaRetrofitClient") Retrofit adpter){
+        return adpter.create(EsiaApi.class);
     }
 
 

@@ -5,9 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("all")
 public class UserInfoResponse {
-
     @SerializedName("firstName")
     private String firstName = "";
+
+    @SerializedName("middleName")
+    private String middleName = "";
 
     @SerializedName("lastName")
     private String lastName = "";
@@ -60,5 +62,9 @@ public class UserInfoResponse {
 
     public String getSnils() {
         return snils;
+    }
+
+    public String getMiddleName() {
+        return middleName;
     }
 }

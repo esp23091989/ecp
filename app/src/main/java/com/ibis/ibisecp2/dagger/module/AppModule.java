@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.location.LocationManager;
 
+import com.google.gson.Gson;
 import com.ibis.ibisecp2.EcpApplication;
 import com.ibis.ibisecp2.retrofit.Repository;
 import com.ibis.ibisecp2.retrofit.RestRepository;
@@ -61,12 +62,18 @@ public class AppModule {
 
     @Provides
     @Singleton
-    SharedPreferencesUtils provideSharedPreferencesUtils(SharedPreferences prefs) {
-        return new SharedPreferencesUtils(prefs);
+    SharedPreferencesUtils provideSharedPreferencesUtils(SharedPreferences prefs, Gson gson) {
+        return new SharedPreferencesUtils(prefs, gson);
     }
 
     @Provides
     public LocationManager provideLocationManager() {
         return (LocationManager) ecpApplication.getSystemService(Context.LOCATION_SERVICE);
+    }
+
+    @Singleton
+    @Provides
+    public Gson provideGson(){
+        return new Gson();
     }
 }

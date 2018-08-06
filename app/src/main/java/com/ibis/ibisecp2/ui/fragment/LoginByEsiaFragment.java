@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
+import com.facebook.stetho.inspector.domstorage.SharedPreferencesHelper;
 import com.ibis.ibisecp2.R;
 import com.ibis.ibisecp2.dagger.component.FragmentComponent;
 import com.ibis.ibisecp2.helpers.ProgressDialogHelper;
@@ -17,6 +18,7 @@ import com.ibis.ibisecp2.presenters.LoginByEsiaPresenter;
 import com.ibis.ibisecp2.ui.view.LoginByEsiaView;
 import com.ibis.ibisecp2.ui.viewutils.AuthenticatingWebView;
 import com.ibis.ibisecp2.ui.viewutils.AuthenticatingWebViewCallbackMethods;
+import com.ibis.ibisecp2.utils.SharedPreferencesUtils;
 
 import javax.inject.Inject;
 
@@ -67,8 +69,10 @@ public class LoginByEsiaFragment extends BaseFragment implements LoginByEsiaView
 
             @Override
             public void displayResults(EsiaTokenMarker marker) {
-//                presenter.getPatient(marker);
+                presenter.saveEsiaMarker(marker);
+                presenter.getPatient();
                 Log.d("","");
+
             }
         });
         authenticatingWebView.makeRequest(URL_ESIA);

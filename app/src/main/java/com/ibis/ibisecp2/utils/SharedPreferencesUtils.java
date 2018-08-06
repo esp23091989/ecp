@@ -3,6 +3,9 @@ package com.ibis.ibisecp2.utils;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
+import com.google.gson.Gson;
+import com.ibis.ibisecp2.model.EsiaTokenMarker;
+
 /**
  * Created by danila on 08.12.15.
  */
@@ -18,6 +21,7 @@ public class SharedPreferencesUtils {
     public static final String KEY_CITY_ID = "cityId";
     public static final String KEY_ITEM_ID = "itemId";
     public static final String KEY_URL = "url";
+    public static final String KEY_ESIA_MARKER = "esiaMarker";
     // All Shared Preferences Keys
     // User name (make variable public to access from outside)
     public static final String KEY_NAME = "name";
@@ -27,10 +31,11 @@ public class SharedPreferencesUtils {
     public static final String KEY_TIME = "time";
 
     private final SharedPreferences sharedPreferences;
+    private final Gson gson;
 
-    public SharedPreferencesUtils(@NonNull SharedPreferences sharedPreferences) {
-
+    public SharedPreferencesUtils(@NonNull SharedPreferences sharedPreferences, Gson gson) {
         this.sharedPreferences = sharedPreferences;
+        this.gson = gson;
     }
 
     public void savePatientId(long patientId) {
@@ -175,6 +180,16 @@ public class SharedPreferencesUtils {
         editor.putString(KEY_URL, url);
 
         // commit changes
+        editor.commit();
+    }
+
+    public EsiaTokenMarker getEsiaMarker() {
+        return gson.fromJson(sharedPreferences.getString(KEY_ESIA_MARKER, ""), EsiaTokenMarker.class);
+    }
+
+    public void saveEsiaMarker(EsiaTokenMarker marker) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_ESIA_MARKER, gson.toJson(marker));
         editor.commit();
     }
 }

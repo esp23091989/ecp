@@ -21,5 +21,4 @@ public class AuthResponse extends ErrorResponse {
     public void setPeople(Patient patient) {
         this.patient = patient;
     }
-
 }
