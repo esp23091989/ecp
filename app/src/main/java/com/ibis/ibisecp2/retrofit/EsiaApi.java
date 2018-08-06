@@ -1,8 +1,8 @@
 package com.ibis.ibisecp2.retrofit;
 
+import com.ibis.ibisecp2.model.ContactInfoResponse;
+import com.ibis.ibisecp2.model.ContactsListResponse;
 import com.ibis.ibisecp2.model.auth.dto.UserInfoResponse;
-
-import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -14,5 +14,8 @@ public interface EsiaApi {
     Single<UserInfoResponse> getUserInfo(@Path("userId") String sbjId);
 
     @GET("/rs/prns/{userId}/ctts")
-    Single<String> getContactsIds(@Path("userId") String sbjId);
+    Single<ContactsListResponse> getContactsInfo(@Path("userId") String sbjId);
+
+    @GET("/rs/prns/{userId}/ctts/{cttsId}")
+    Single<ContactInfoResponse> getContactById(@Path("userId") String sbjid, @Path("cttsId") String contactId);
 }
