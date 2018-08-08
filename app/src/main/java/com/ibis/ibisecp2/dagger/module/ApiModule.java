@@ -52,7 +52,7 @@ public class ApiModule {
     private static final String BASE_URL_ECP_PROD_v2 = "https://ecp.miacugra.ru/";
     private static final String BASE_URL_ECP_HTTPS = "https://192.168.1.41/";
     private static final String BASE_URL_TEST = "http://95.174.103.205:18000/";
-    private static final String BASE_URL_TESTS = "https://ecp-test.oblteh.ru/";
+    private static final String BASE_URL_TESTS = "https://ecp-test.miacugra.ru/";
     private static final String BASE_URL_MIAC = "https://ecp-test.miacugra.ru/";
     private static final String BASE_URL_ESIA = "https://esia-portal1.test.gosuslugi.ru/";
 
@@ -81,10 +81,11 @@ public class ApiModule {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
-        EsiaTokenMarker esiaTokenMarker = sharedPreferencesUtils.getEsiaMarker();
+
         clientBuilder.addNetworkInterceptor(interceptor);
         clientBuilder.addInterceptor(chain -> {
             Request request = chain.request();
+            EsiaTokenMarker esiaTokenMarker = sharedPreferencesUtils.getEsiaMarker();
 
             Request.Builder requestBuilder = request.newBuilder()
                     .header("Authorization", "Bearer " + esiaTokenMarker.getAccessToken());

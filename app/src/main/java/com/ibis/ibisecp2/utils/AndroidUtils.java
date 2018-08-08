@@ -3,6 +3,7 @@ package com.ibis.ibisecp2.utils;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -33,6 +34,19 @@ public class AndroidUtils {
             return;
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public static void hideKeyboard(Fragment fragment){
+        if(fragment.getActivity() == null)
+            return;
+
+        InputMethodManager imm = (InputMethodManager) fragment.getActivity()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        if (!imm.isActive()) {
+            return;
+        }
+        imm.hideSoftInputFromWindow(fragment.getView().getWindowToken(), 0);
     }
 
     public static boolean isNetworkConnected(Context context) {
