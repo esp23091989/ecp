@@ -2,12 +2,14 @@ package com.ibis.ibisecp2.helpers.impl;
 
 import com.ibis.ibisecp2.helpers.AuthHelper;
 import com.ibis.ibisecp2.model.AuthResponse;
-import com.ibis.ibisecp2.model.ContactsListResponse;
+import com.ibis.ibisecp2.model.auth.dto.ContactsListResponse;
 import com.ibis.ibisecp2.model.EsiaTokenMarker;
+import com.ibis.ibisecp2.model.auth.dto.KidsListResponse;
 import com.ibis.ibisecp2.retrofit.EcpAp;
 import com.ibis.ibisecp2.retrofit.EsiaApi;
 import com.ibis.ibisecp2.utils.EncryptUtils;
 import com.ibis.ibisecp2.utils.RxUtil;
+import com.ibis.ibisecp2.utils.rx.mappers.ChildrenMapper;
 import com.ibis.ibisecp2.utils.rx.zippers.AuthResponseZipper;
 
 import javax.inject.Inject;
@@ -26,6 +28,7 @@ public class AuthHelperImpl implements AuthHelper {
     private final EsiaApi esiaApi;
     private EncryptUtils encryptUtils;
     private final AuthResponseZipper authResponseZipper;
+    private final ChildrenMapper childrenMapper;
 
     @Inject
     public AuthHelperImpl(
@@ -33,13 +36,14 @@ public class AuthHelperImpl implements AuthHelper {
             EsiaApi esiaApi,
             RxUtil rxUtil,
             EncryptUtils encryptUtils,
-            AuthResponseZipper authResponseZipper
-    ) {
+            AuthResponseZipper authResponseZipper,
+            ChildrenMapper childrenMapper) {
         this.api = api;
         this.rxUtil = rxUtil;
         this.esiaApi = esiaApi;
         this.encryptUtils = encryptUtils;
         this.authResponseZipper = authResponseZipper;
+        this.childrenMapper = childrenMapper;
     }
 
     @Override
@@ -50,15 +54,22 @@ public class AuthHelperImpl implements AuthHelper {
 
     @Override
     public Single<AuthResponse> auth(EsiaTokenMarker marker) {
-        return esiaApi.getUserInfo(marker.getSbjId())
-                .zipWith(
-                        esiaApi.getContactsList(marker.getSbjId())
-                                .flatMapIterable(ContactsListResponse::getContactsRefList)
-                                .map(s -> s.substring(s.lastIndexOf('/')))
-                                .flatMap(cttsId -> esiaApi.getContactById(marker.getSbjId(), cttsId))
-                                .toList()
-                                .toSingle()
-                        , (authResponseZipper::transform)
-                );
+        return Observable.zip(
+                esiaApi.getUserInfo(marker.getSbjId()),
+                esiaApi.getContactsList(marker.getSbjId())
+                        .flatMapIterable(ContactsListResponse::getContactsRefList)
+                        .map(s -> s.substring(s.lastIndexOf('/')))
+                        .flatMap(cttsId -> esiaApi.getContactById(marker.getSbjId(), cttsId))
+                        .toList(),
+
+                esiaApi.getKidById(marker.getSbjId())
+                        .flatMapIterable(KidsListResponse::getKidsRefList)
+                        .map(s -> s.substring(s.lastIndexOf('/')))
+                        .flatMap(kidId -> esiaApi.getKidById(marker.getSbjId(), kidId))
+                        .map(childrenMapper::transform)
+                        .toList(),
+                authResponseZipper::transform
+        ).toSingle();
+
     }
 }

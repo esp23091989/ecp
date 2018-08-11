@@ -1,4 +1,4 @@
-package com.ibis.ibisecp2.model;
+package com.ibis.ibisecp2.model.auth.dto;
 
 import com.google.gson.annotations.SerializedName;
 

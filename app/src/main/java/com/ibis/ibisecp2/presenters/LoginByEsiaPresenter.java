@@ -10,4 +10,6 @@ public abstract class LoginByEsiaPresenter extends BasePresenter<LoginByEsiaView
     public abstract void interruptRequest();
 
     public abstract void getPatient();
+
+    public abstract void openPatientListScreen();
 }

@@ -3,7 +3,8 @@ package com.ibis.ibisecp2.utils.rx.zippers;
 import android.util.Patterns;
 
 import com.ibis.ibisecp2.model.AuthResponse;
-import com.ibis.ibisecp2.model.ContactInfoResponse;
+import com.ibis.ibisecp2.model.Child;
+import com.ibis.ibisecp2.model.auth.dto.ContactInfoResponse;
 import com.ibis.ibisecp2.model.Patient;
 import com.ibis.ibisecp2.model.auth.dto.UserInfoResponse;
 
@@ -13,17 +14,15 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
-/**
- * Created by Юленька on 06.08.2018.
- */
-
 public class AuthResponseZipper {
 
     @Inject
     public AuthResponseZipper() {
     }
 
-    public AuthResponse transform(UserInfoResponse userInfoResponse, List<ContactInfoResponse> contactInfoResponses){
+    public AuthResponse transform(UserInfoResponse userInfoResponse,
+                                  List<ContactInfoResponse> contactInfoResponses,
+                                  List<Child> children){
         Patient patient = new Patient();
         patient.setFirstName(userInfoResponse.getFirstName());
         patient.setMiddleName(userInfoResponse.getMiddleName());
@@ -37,6 +36,8 @@ public class AuthResponseZipper {
                 patient.setPhone(contactInfoResponse.getValue());
             }
         }
+
+        patient.setChildren(children);
 
         AuthResponse authResponse = new AuthResponse();
         authResponse.setPeople(patient);

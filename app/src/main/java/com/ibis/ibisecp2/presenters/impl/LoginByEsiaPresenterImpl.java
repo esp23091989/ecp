@@ -87,6 +87,7 @@ public class LoginByEsiaPresenterImpl extends LoginByEsiaPresenter {
                     @Override
                     public void onError(Throwable error) {
                         Log.d("", "");
+                        view.errorLoginMsg("Ошибка авторизации");
                     }
                 });
     }
@@ -238,5 +239,10 @@ public class LoginByEsiaPresenterImpl extends LoginByEsiaPresenter {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void openPatientListScreen() {
+        navigator.openListPatientFragment();
     }
 }

@@ -172,7 +172,7 @@ public class StartPresenterImpl extends StartPresenter {
             public void onNext(List<Patient> patients) {
                 if (isViewAttached()) {
                     if (patients.isEmpty()) {
-                        navigator.openLoginFragment(false);
+                        navigator.openLoginByEsiaFragment();
                     } else {
                         navigator.openListPatientFragment();
                     }

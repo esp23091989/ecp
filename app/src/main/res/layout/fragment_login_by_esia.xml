@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/layout_bg"
     tools:context=".ui.fragment.LoginByEsiaFragment">
 
-    <WebView
-        android:id="@+id/webView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="WebViewLayout">
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="320dp"
+            android:layout_height="460dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <Button
+            android:id="@+id/buttonDialogList"
+            style="@style/style_button"
+            android:layout_marginTop="@dimen/activity_vertical_margin_8dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin_8dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:text="Выбрать из списка" />
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/pb_web"
@@ -17,7 +38,9 @@
         android:layout_height="wrap_content"
         style="@style/ProgressBar.Horizontal"
         android:layout_marginBottom="-8dp"
-        android:layout_marginTop="-7dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:padding="0dp"
         android:indeterminate="true"
         android:visibility="gone"

@@ -68,4 +68,5 @@
     <dimen name="tab_container_bottom_height">2dp</dimen>
 
     <dimen name="frame_layout_auto_width">0dp</dimen>
+    <dimen name="activity_vertical_margin_8dp">8dp</dimen>
 </resources>

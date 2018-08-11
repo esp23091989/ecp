@@ -98,6 +98,6 @@ public class ListPatientPresenterImpl extends ListPatientPresenter {
 
     @Override
     public void newPatientLogin() {
-        navigator.openLoginFragment(false);
+        navigator.openLoginByEsiaFragment();
     }
 }

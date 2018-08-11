@@ -419,7 +419,7 @@ public class Navigator {
     public void openLoginByEsiaFragment(){
         FragmentManager fm = getFragmentManager();
         LoginByEsiaFragment loginByEsiaFragment = LoginByEsiaFragment.newInstance();
-        replaceFragment(loginByEsiaFragment, LoginByEsiaFragment.TAG);
+        loginByEsiaFragment.show(fm, LoginByEsiaFragment.TAG);
 
     }
 
