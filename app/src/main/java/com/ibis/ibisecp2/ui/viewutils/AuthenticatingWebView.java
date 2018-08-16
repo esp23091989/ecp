@@ -15,9 +15,11 @@ package com.ibis.ibisecp2.ui.viewutils;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.net.http.SslError;
 import android.os.Build;
 import android.view.View;
 import android.webkit.CookieManager;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -110,16 +112,11 @@ public class AuthenticatingWebView {
      */
     private class MyCustomWebViewClient extends WebViewClient {
 
-        /**
-         * Callback executes BEFORE the WebView makes the http request We examine the url to see if it contains the
-         * redirect URI, and if so intercept it, hide the webview and display the token. Note - if something goes wrong
-         * in the long OAuth2 dance, the user will end up with an error displayed on the webview. They can restart sign
-         * in by pushing the [Sign In Again] button.
-         *
-         * @param view the WebView that executed the callback
-         * @param url the URL that the WebView is about to load
-         * @return returns true to permit the url to be loaded into the webview
-         */
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            handler.proceed();
+        }
+
         @Override
         public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
 
@@ -141,46 +138,16 @@ public class AuthenticatingWebView {
             return true;
         }
 
-        /**
-         * Callback fires when page starts to load. Used to start the Progress Dialog.
-         *
-         * @param view the webView referred to by this callback
-         * @param url the URL that the webView started to load
-         * @param favicon the favicon of the page being loaded
-         */
         @Override
         public void onPageStarted(final WebView view, final String url, final Bitmap favicon) {
             listener.startProgressDialog();
         }
 
-        /**
-         * Callback fires when page finishes loading. We use it to turn off the Progress Dialog.
-         *
-         * @param view the webView referred to by this callback
-         * @param url the URL that this page is loading
-         */
         @Override
         public void onPageFinished(final WebView view, final String url) {
             listener.stopProgressDialog();
+            view.scrollTo(0,0);
         }
     }
 
-    /**
-     * Parse a redirect url into its parameters. The string has the form
-     * [redirectURI]#[param1]=[val1]&[param2]=[val2]...
-     *
-     * @param redirectUrl the redirect url to be parsed
-     */
-    private void parseRedirectURI(final String redirectUrl) {
-
-        String[] params = redirectUrl.split("#")[1].split("&");
-
-        for (String parameter : params) {
-            if (parameter.contains("=")) {
-                authorizationReturnParameters.put(parameter.split("=")[0], parameter.split("=")[1]);
-            } else {
-                authorizationReturnParameters.put(parameter, "");
-            }
-        }
-    }
 }

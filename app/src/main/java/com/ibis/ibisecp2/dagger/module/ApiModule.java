@@ -16,11 +16,13 @@ import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+import javax.net.SocketFactory;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -91,6 +93,28 @@ public class ApiModule {
                     .header("Authorization", "Bearer " + esiaTokenMarker.getAccessToken());
             return chain.proceed(requestBuilder.build());
         });
+
+        try {
+            clientBuilder.sslSocketFactory((SSLSocketFactory) SSLSocketFactory.getDefault(), new X509TrustManager() {
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+
+                }
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+
+                }
+
+                @Override
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new java.security.cert.X509Certificate[]{};
+                }
+            });
+            clientBuilder.hostnameVerifier((hostname, session) -> true);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         return clientBuilder.build();
     }

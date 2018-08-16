@@ -15,12 +15,14 @@ import com.ibis.ibisecp2.model.SvedMu;
 import com.ibis.ibisecp2.model.Tasks;
 import com.ibis.ibisecp2.model.VisitHistoryResponse;
 import com.ibis.ibisecp2.model.VisitResponse;
+import com.ibis.ibisecp2.model.auth.dto.UserInfoDTO;
 
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
+import rx.Single;
 
 /**
  * Created by danila on 27.10.16.
@@ -29,7 +31,7 @@ import rx.Observable;
 public interface EcpAp {
     //    @FormUrlEncoded
     @POST("Auth")
-    Observable<AuthResponse> auth(@Query("token") String login);
+    Single<AuthResponse> auth(@Body UserInfoDTO userInfoDTO);
 
     @POST("GetTime")
     Observable<CurrentTime> getTime();

@@ -1,5 +1,7 @@
 package com.ibis.ibisecp2.helpers.impl;
 
+import android.util.Log;
+
 import com.ibis.ibisecp2.helpers.AuthHelper;
 import com.ibis.ibisecp2.model.AuthResponse;
 import com.ibis.ibisecp2.model.auth.dto.ContactsListResponse;
@@ -46,30 +48,44 @@ public class AuthHelperImpl implements AuthHelper {
         this.childrenMapper = childrenMapper;
     }
 
+//    @Override
+//    public Observable<AuthResponse> auth(String login, String password, String idType) {
+//        return api.auth(encryptUtils.encryptLogin(login, password, idType))
+//                .compose(rxUtil.applySchedulers());
+//    }
+
     @Override
     public Observable<AuthResponse> auth(String login, String password, String idType) {
-        return api.auth(encryptUtils.encryptLogin(login, password, idType))
-                .compose(rxUtil.applySchedulers());
+        return null;
     }
 
     @Override
     public Single<AuthResponse> auth(EsiaTokenMarker marker) {
-        return Observable.zip(
-                esiaApi.getUserInfo(marker.getSbjId()),
-                esiaApi.getContactsList(marker.getSbjId())
-                        .flatMapIterable(ContactsListResponse::getContactsRefList)
-                        .map(s -> s.substring(s.lastIndexOf('/')))
-                        .flatMap(cttsId -> esiaApi.getContactById(marker.getSbjId(), cttsId))
-                        .toList(),
+//        return Observable.zip(
+//                esiaApi.getUserInfo(marker.getSbjId()),
+//                esiaApi.getContactsList(marker.getSbjId())
+//                        .flatMapIterable(ContactsListResponse::getContactsRefList)
+//                        .map(s -> s.substring(s.lastIndexOf('/')))
+//                        .flatMap(cttsId -> esiaApi.getContactById(marker.getSbjId(), cttsId))
+//                        .toList(),
+//
+//                esiaApi.getKidById(marker.getSbjId())
+//                        .flatMapIterable(KidsListResponse::getKidsRefList)
+//                        .map(s -> s.substring(s.lastIndexOf('/')))
+//                        .flatMap(kidId -> esiaApi.getKidById(marker.getSbjId(), kidId))
+//                        .map(childrenMapper::transform)
+//                        .toList(),
+//                authResponseZipper::transform
+//        ).toSingle();
 
-                esiaApi.getKidById(marker.getSbjId())
-                        .flatMapIterable(KidsListResponse::getKidsRefList)
-                        .map(s -> s.substring(s.lastIndexOf('/')))
-                        .flatMap(kidId -> esiaApi.getKidById(marker.getSbjId(), kidId))
-                        .map(childrenMapper::transform)
-                        .toList(),
-                authResponseZipper::transform
-        ).toSingle();
+        return esiaApi.getAllUserInfo(marker.getSbjId())
+                .flatMap(userInfoDTO -> {
+                    Log.d("","");
+                    return api.auth(userInfoDTO);
+                });
+
 
     }
+
+
 }

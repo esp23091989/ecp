@@ -3,12 +3,14 @@ package com.ibis.ibisecp2.retrofit;
 import com.ibis.ibisecp2.model.auth.dto.ContactInfoResponse;
 import com.ibis.ibisecp2.model.auth.dto.ContactsListResponse;
 import com.ibis.ibisecp2.model.auth.dto.KidsListResponse;
+import com.ibis.ibisecp2.model.auth.dto.UserInfoDTO;
 import com.ibis.ibisecp2.model.auth.dto.UserInfoResponse;
 
 import rx.Observable;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import rx.Single;
 
 public interface EsiaApi {
 
@@ -26,4 +28,7 @@ public interface EsiaApi {
 
     @GET("/rs/prns/{userId}/kids/{kidId}")
     Observable<UserInfoResponse> getKidById(@Path("userId") String sbjId, @Path("kidId") String kidId);
+
+    @GET("/rs/prns/{userId}/?embed=(contacts.elements, kids.elements)")
+    Single<UserInfoDTO> getAllUserInfo(@Path("userId") String userId);
 }

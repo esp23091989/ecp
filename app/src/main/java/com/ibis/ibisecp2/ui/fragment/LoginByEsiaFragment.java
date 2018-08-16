@@ -68,6 +68,7 @@ public class LoginByEsiaFragment extends DialogFragment implements LoginByEsiaVi
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login_by_esia, container, false);
         ButterKnife.bind(this, view);
+        setRetainInstance(true);
 
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
