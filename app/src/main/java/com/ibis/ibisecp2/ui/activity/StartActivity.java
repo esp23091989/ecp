@@ -115,12 +115,12 @@ public class StartActivity extends BaseActivity implements StartView {
 
     @OnClick(R.id.buttonLogin)
     public void loginClick() {
-        if (getIntent().hasExtra(ERROR_CODE)) {
-            navigator.openLoginByEsiaFragment();
-        } else {
-            startPresenter.login();
-        }
-//        navigator.openScreen(LoginActivity.class);
+//        if (getIntent().hasExtra(ERROR_CODE)) {
+//            navigator.openScreenForResult(LoginActivity.class, RQ_ESIA_MARKER);
+//        } else {
+//            startPresenter.login();
+//        }
+        navigator.openScreen(LoginActivity.class);
     }
 
     @Override

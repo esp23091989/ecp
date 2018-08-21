@@ -6,6 +6,8 @@ package com.ibis.ibisecp2.ui.view;
 
 public interface LoginByEsiaView {
 
+    void refreshWebView();
+
     void showWebLoading();
 
     void hideWebLoading();
@@ -17,4 +19,10 @@ public interface LoginByEsiaView {
     void hideLoading();
 
     void savePatient();
+
+    void onErrorChild(String s);
+
+    void openPatientList();
+
+    void openMainScreen();
 }

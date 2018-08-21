@@ -22,7 +22,9 @@ import android.widget.TextView;
 
 import com.ibis.ibisecp2.R;
 import com.ibis.ibisecp2.adapter.PatientAdapter;
+import com.ibis.ibisecp2.dagger.component.FragmentComponent;
 import com.ibis.ibisecp2.events.ErrorChildEvent;
+import com.ibis.ibisecp2.events.NewPatientrRegistredEvent;
 import com.ibis.ibisecp2.helpers.DialogsHelper;
 import com.ibis.ibisecp2.listeners.PatientAdapterListener;
 import com.ibis.ibisecp2.model.Patient;
@@ -45,7 +47,7 @@ import butterknife.OnClick;
 /**
  * Created by danila on 10.06.16.
  */
-public class ListPatientFragment extends DialogFragment implements PatientAdapterListener,
+public class ListPatientFragment extends BaseFragment implements PatientAdapterListener,
         ListPatientView {
 
     @BindView(R.id.recyclerViewPatients)
@@ -69,9 +71,6 @@ public class ListPatientFragment extends DialogFragment implements PatientAdapte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_list_patient, container, false);
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        getDialog().setCanceledOnTouchOutside(false);
         ButterKnife.bind(this, rootView);
         BaseActivity activity = (BaseActivity) getActivity();
         activity.getComponent().plusFragmentComponent().inject(this);
@@ -87,11 +86,6 @@ public class ListPatientFragment extends DialogFragment implements PatientAdapte
     @Override
     public void onStart() {
         super.onStart();
-        Dialog dialog = getDialog();
-        if (dialog != null && dialog.getWindow() != null) {
-            dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-        }
 
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
@@ -121,13 +115,6 @@ public class ListPatientFragment extends DialogFragment implements PatientAdapte
     public void onPatientClick(Patient patient) {
         patient.setHasPass(true);
         presenter.onPatientClick(patient);
-        dismiss();
-    }
-
-    @OnClick(R.id.btnAddPatient)
-    public void onClick() {
-        presenter.newPatientLogin();
-        dismiss();
     }
 
     private void initSwipe() {
@@ -217,8 +204,14 @@ public class ListPatientFragment extends DialogFragment implements PatientAdapte
     }
 
     @Subscribe(sticky = true)
-    public void onErrorChildEvent(ErrorChildEvent event) {
+    public void onNewPatientRegistred(NewPatientrRegistredEvent event) {
         EventBus.getDefault().removeStickyEvent(event);
-        dialogsHelper.alertDialogErrorMsg(event.getError());
+        presenter.getPatientList();
     }
+
+    @Override
+    void doInjection(FragmentComponent fragmentComponent) {
+        fragmentComponent.inject(this);
+    }
+
 }

@@ -96,6 +96,18 @@ public class Navigator {
         }
     }
 
+    public <T> void openScreenForResult(Class<T> entityClass, int requestCode) {
+        try {
+            Intent intent = new Intent(activity, entityClass);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP).addFlags(
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            activity.startActivityForResult(intent, requestCode);
+            activity.overridePendingTransition(R.anim.left_in, R.anim.left_out);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
     public <T> void openScreenNoHistory(Class<T> entityClass) {
         if (!(activity instanceof MainActivity)) {
             activity.finish();
@@ -405,9 +417,9 @@ public class Navigator {
     }
 
     public void openListPatientFragment() {
-        FragmentManager fm = getFragmentManager();
-        ListPatientFragment patientFragment = ListPatientFragment.newInstance();
-        patientFragment.show(fm, ListPatientFragment.class.getSimpleName());
+//        FragmentManager fm = getFragmentManager();
+//        ListPatientFragment patientFragment = ListPatientFragment.newInstance();
+//        patientFragment.show(fm, ListPatientFragment.class.getSimpleName());
     }
 
     public void openLoginFragment(boolean isError) {
@@ -417,9 +429,8 @@ public class Navigator {
     }
 
     public void openLoginByEsiaFragment(){
-        FragmentManager fm = getFragmentManager();
         LoginByEsiaFragment loginByEsiaFragment = LoginByEsiaFragment.newInstance();
-        loginByEsiaFragment.show(fm, LoginByEsiaFragment.TAG);
+        replaceFragment(loginByEsiaFragment, LoginByEsiaFragment.TAG);
 
     }
 
@@ -484,4 +495,5 @@ public class Navigator {
                     e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
+
 }

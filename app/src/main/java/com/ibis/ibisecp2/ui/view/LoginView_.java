@@ -1,4 +1,6 @@
 package com.ibis.ibisecp2.ui.view;
 
-public interface LoginView_ {
+import com.ibis.ibisecp2.ui.LocalLoginNavigator;
+
+public interface LoginView_ extends LocalLoginNavigator {
 }

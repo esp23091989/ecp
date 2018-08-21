@@ -2,6 +2,7 @@ package com.ibis.ibisecp2.presenters.impl;
 
 import android.util.Log;
 
+import com.ibis.ibisecp2.events.NewPatientrRegistredEvent;
 import com.ibis.ibisecp2.helpers.AuthHelper;
 import com.ibis.ibisecp2.helpers.PatientHelper;
 import com.ibis.ibisecp2.model.AuthResponse;
@@ -10,9 +11,10 @@ import com.ibis.ibisecp2.model.EsiaTokenMarker;
 import com.ibis.ibisecp2.model.Patient;
 import com.ibis.ibisecp2.model.Warning;
 import com.ibis.ibisecp2.presenters.LoginByEsiaPresenter;
-import com.ibis.ibisecp2.ui.Navigator;
 import com.ibis.ibisecp2.utils.RxUtil;
 import com.ibis.ibisecp2.utils.SharedPreferencesUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,7 +33,6 @@ public class LoginByEsiaPresenterImpl extends LoginByEsiaPresenter {
     private final AuthHelper authHelper;
     private final RxUtil rxUtil;
     private final PatientHelper patientHelper;
-    private final Navigator navigator;
 
     private EsiaTokenMarker marker;
 
@@ -40,13 +41,11 @@ public class LoginByEsiaPresenterImpl extends LoginByEsiaPresenter {
             SharedPreferencesUtils sharedPreferencesUtils,
             AuthHelper authHelper,
             RxUtil rxUtil,
-            PatientHelper patientHelper,
-            Navigator navigator) {
+            PatientHelper patientHelper) {
         this.preferencesUtils = sharedPreferencesUtils;
         this.authHelper = authHelper;
         this.rxUtil = rxUtil;
         this.patientHelper = patientHelper;
-        this.navigator = navigator;
     }
 
     @Override
@@ -62,10 +61,13 @@ public class LoginByEsiaPresenterImpl extends LoginByEsiaPresenter {
 
     @Override
     public void getPatient() {
-        authHelper.auth(marker)
+        subscription = authHelper.auth(marker)
                 .compose(rxUtil.schedulers())
                 .doOnSubscribe(() -> view.showLoading())
-                .doOnEach((s) -> view.hideLoading())
+                .doOnEach((s) -> {
+                    view.hideLoading();
+                    view.refreshWebView();
+                })
                 .subscribe(new SingleSubscriber<AuthResponse>() {
                     @Override
                     public void onSuccess(AuthResponse authResponse) {
@@ -202,9 +204,9 @@ public class LoginByEsiaPresenterImpl extends LoginByEsiaPresenter {
                 child = "детей:";
             }
 
-//            if(!warnMsg.equals(""))
-//                view.onErrorChild("Ошибка в данных " + child + warnMsg
-//                        + ".\n\nОбратитесь в контакт-центр по тел. 88001008603");
+            if(!warnMsg.equals(""))
+                view.onErrorChild("Ошиб]ка в данных " + child + warnMsg
+                        + ".\n\nОбратитесь в контакт-центр по тел. 88001008603");
         }
 
         subscription = patientHelper.savePatient(patient)
@@ -229,20 +231,18 @@ public class LoginByEsiaPresenterImpl extends LoginByEsiaPresenter {
 
                     @Override
                     public void onNext(Boolean aBoolean) {
+                        EventBus.getDefault().postSticky(new NewPatientrRegistredEvent());
                         if (isViewAttached()) {
                             view.savePatient();
-                            if (patient.getChildren() != null && patient.getChildren().size() > 0) {
-                                navigator.openListPatientFragment();
-                            } else {
-                                navigator.openMainScreen(true);
-                            }
+//                            if (patient.getChildren() != null && patient.getChildren().size() > 0) {
+//                                view.openPatientList();
+//                            } else {
+//                                view.openMainScreen();
+//                            }
+                            view.openPatientList();
                         }
                     }
                 });
     }
 
-    @Override
-    public void openPatientListScreen() {
-        navigator.openListPatientFragment();
-    }
 }

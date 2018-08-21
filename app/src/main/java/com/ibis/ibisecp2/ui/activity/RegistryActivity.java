@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.ibis.ibisecp2.R;
+import com.ibis.ibisecp2.adapter.ViewPagerAdapter;
 import com.ibis.ibisecp2.dagger.component.ActivityComponent;
 import com.ibis.ibisecp2.events.CancelVisit;
 import com.ibis.ibisecp2.helpers.DialogsHelper;
@@ -136,40 +137,6 @@ public class RegistryActivity extends BaseActivity {
             String txt = data.getStringExtra("msg");
             dialogsHelper.alertDialogErrorMsg(txt);
         }
-    }
-
-    private class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-
-        public Fragment getFragment(int position) {
-            return mFragmentList.get(position);
-        }
-
     }
 
     @Override

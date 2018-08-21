@@ -96,8 +96,4 @@ public class ListPatientPresenterImpl extends ListPatientPresenter {
         navigator.getActivity().finish();
     }
 
-    @Override
-    public void newPatientLogin() {
-        navigator.openLoginByEsiaFragment();
-    }
 }

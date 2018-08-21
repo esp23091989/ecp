@@ -165,6 +165,7 @@
         <item>https://ecp-test.oblteh.ru</item>
         <item>https://ecp-test.miacugra.ru</item>
         <item>https://ecp.miacugra.ru</item>
+        <item>http://tgn.oblteh.ru:10081/IbisECPService/</item>
     </string-array>
 
 </resources>

@@ -6,5 +6,7 @@ package com.ibis.ibisecp2.helpers;
 public interface ProgressDialogHelper {
     void showDialog();
 
+    void showNotCancelableDialog();
+
     void hideDialog();
 }

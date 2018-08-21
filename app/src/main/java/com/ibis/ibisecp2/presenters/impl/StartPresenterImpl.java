@@ -21,7 +21,6 @@ import rx.Subscription;
  */
 public class StartPresenterImpl extends StartPresenter {
 
-    private Subscription subscription;
     private SharedPreferencesUtils preferencesUtils;
     private DialogsHelper dialogsHelper;
     private List<Patient> patientList = Collections.emptyList();

@@ -26,8 +26,18 @@ public class ProgressDialogHelperImpl implements ProgressDialogHelper {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(activity);
             progressDialog.setMessage(activity.getString(R.string.loading));
-            progressDialog.setCancelable(true);
         }
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+    }
+
+    @Override
+    public void showNotCancelableDialog(){
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(activity);
+            progressDialog.setMessage(activity.getString(R.string.loading));
+        }
+        progressDialog.setCancelable(false);
         progressDialog.show();
     }
 

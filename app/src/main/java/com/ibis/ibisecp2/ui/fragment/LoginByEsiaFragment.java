@@ -1,40 +1,37 @@
 package com.ibis.ibisecp2.ui.fragment;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
 import com.ibis.ibisecp2.R;
 import com.ibis.ibisecp2.dagger.component.FragmentComponent;
+import com.ibis.ibisecp2.events.ErrorChildEvent;
 import com.ibis.ibisecp2.helpers.DialogsHelper;
 import com.ibis.ibisecp2.helpers.ProgressDialogHelper;
 import com.ibis.ibisecp2.model.EsiaTokenMarker;
 import com.ibis.ibisecp2.presenters.LoginByEsiaPresenter;
+import com.ibis.ibisecp2.ui.LocalLoginNavigator;
 import com.ibis.ibisecp2.ui.activity.BaseActivity;
 import com.ibis.ibisecp2.ui.view.LoginByEsiaView;
 import com.ibis.ibisecp2.ui.viewutils.AuthenticatingWebView;
 import com.ibis.ibisecp2.ui.viewutils.AuthenticatingWebViewCallbackMethods;
 import com.ibis.ibisecp2.utils.AndroidUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
-public class LoginByEsiaFragment extends DialogFragment implements LoginByEsiaView {
+public class LoginByEsiaFragment extends BaseFragment implements LoginByEsiaView {
     public static final String TAG = LoginByEsiaFragment.class.getSimpleName();
     public static final String URL_ESIA = "https://ecp-test.miacugra.ru/esia";
 
@@ -53,9 +50,15 @@ public class LoginByEsiaFragment extends DialogFragment implements LoginByEsiaVi
     ProgressDialogHelper progressDialogHelper;
 
     private AuthenticatingWebView authenticatingWebView;
+    private LocalLoginNavigator localLoginNavigator;
 
     public static LoginByEsiaFragment newInstance() {
         return new LoginByEsiaFragment();
+    }
+
+    @Override
+    void doInjection(FragmentComponent fragmentComponent) {
+        fragmentComponent.inject(this);
     }
 
     @Override
@@ -70,12 +73,6 @@ public class LoginByEsiaFragment extends DialogFragment implements LoginByEsiaVi
         ButterKnife.bind(this, view);
         setRetainInstance(true);
 
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT);
-        getDialog().setCanceledOnTouchOutside(false);
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         ButterKnife.bind(this, view);
         BaseActivity activity = (BaseActivity) getActivity();
         activity.getComponent().plusFragmentComponent().inject(this);
@@ -108,6 +105,21 @@ public class LoginByEsiaFragment extends DialogFragment implements LoginByEsiaVi
     }
 
     @Override
+    public void refreshWebView(){
+        authenticatingWebView.makeRequest(URL_ESIA);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof LocalLoginNavigator) {
+            this.localLoginNavigator = (LocalLoginNavigator) context;
+        }
+    }
+
+
+
+    @Override
     public void showWebLoading() {
         progressBar.setVisibility(View.VISIBLE);
     }
@@ -119,7 +131,7 @@ public class LoginByEsiaFragment extends DialogFragment implements LoginByEsiaVi
 
     @Override
     public void showLoading() {
-        progressDialogHelper.showDialog();
+        progressDialogHelper.showNotCancelableDialog();
     }
 
     @Override
@@ -138,9 +150,19 @@ public class LoginByEsiaFragment extends DialogFragment implements LoginByEsiaVi
         AndroidUtils.hideKeyboard(this);
     }
 
-    @OnClick(R.id.buttonDialogList)
-    public void listPatientShow() {
-        presenter.openPatientListScreen();
-        getDialog().dismiss();
+    @Override
+    public void onErrorChild(String text) {
+        EventBus.getDefault().postSticky(new ErrorChildEvent(text));
     }
+
+    @Override
+    public void openPatientList() {
+        localLoginNavigator.openPatientList(true);
+    }
+
+    @Override
+    public void openMainScreen() {
+        localLoginNavigator.openMainScreen();
+    }
+
 }

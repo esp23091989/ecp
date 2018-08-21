@@ -14,6 +14,4 @@ public abstract class ListPatientPresenter extends BasePresenter<ListPatientView
 
     public abstract void onPatientClick(Patient patient);
 
-    public abstract void newPatientLogin();
-
 }
