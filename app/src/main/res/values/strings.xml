@@ -97,6 +97,9 @@
     <string name="title.list.empty">Список пуст</string>
     <string name="title.cartulary">Журнал записей</string>
 
+    <string name="login.tab.add_new_patient">добавить пользователя</string>
+    <string name="login.tab.list_patients">список пользователей</string>
+
     <string-array name="main_items">
         <item>@string/title.appointment</item>
         <item>@string/title.cartulary</item>

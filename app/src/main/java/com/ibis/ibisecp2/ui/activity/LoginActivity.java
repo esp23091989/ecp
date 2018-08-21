@@ -65,9 +65,9 @@ public class LoginActivity extends BaseActivity implements LoginView_ {
     private void initViewPager() {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(LoginByEsiaFragment.newInstance(),
-                getString(R.string.diary_tab_remembers));
+                getString(R.string.login_tab_add_new_patient));
         adapter.addFragment(new ListPatientFragment(),
-                getString(R.string.diary_tab_history));
+                getString(R.string.login_tab_list_patients));
         viewPager.setAdapter(adapter);
 
         tabs.setupWithViewPager(viewPager);
@@ -114,7 +114,7 @@ public class LoginActivity extends BaseActivity implements LoginView_ {
 
     @Override
     public void openPatientList(boolean smoothScroll) {
-        viewPager.setCurrentItem(PATIENT_LIST_VP_POSITION,false);
+        viewPager.setCurrentItem(PATIENT_LIST_VP_POSITION,smoothScroll);
     }
 
     @Override
