@@ -234,12 +234,11 @@ public class LoginByEsiaPresenterImpl extends LoginByEsiaPresenter {
                         EventBus.getDefault().postSticky(new NewPatientrRegistredEvent());
                         if (isViewAttached()) {
                             view.savePatient();
-//                            if (patient.getChildren() != null && patient.getChildren().size() > 0) {
-//                                view.openPatientList();
-//                            } else {
-//                                view.openMainScreen();
-//                            }
-                            view.openPatientList();
+                            if (patient.getChildren() != null && patient.getChildren().size() > 0) {
+                                view.openPatientList();
+                            } else {
+                                view.openMainScreen();
+                            }
                         }
                     }
                 });
