@@ -13,4 +13,12 @@ public interface StartView {
     void savePatient();
 
     void deletePatient();
+    
+    void showLoad();
+    
+    void hideLoad();
+
+    void errorLoginMsg(String errorMessage);
+
+    void onErrorChild(String childErrorMessage);
 }

@@ -19,12 +19,16 @@ import com.ibis.ibisecp2.EcpApplication;
 import com.ibis.ibisecp2.R;
 import com.ibis.ibisecp2.adapter.SpinnerAdapter;
 import com.ibis.ibisecp2.dagger.component.ActivityComponent;
+import com.ibis.ibisecp2.events.ErrorChildEvent;
 import com.ibis.ibisecp2.helpers.DialogsHelper;
+import com.ibis.ibisecp2.helpers.ProgressDialogHelper;
 import com.ibis.ibisecp2.model.Patient;
 import com.ibis.ibisecp2.presenters.StartPresenter;
 import com.ibis.ibisecp2.ui.Navigator;
 import com.ibis.ibisecp2.ui.view.StartView;
 import com.ibis.ibisecp2.utils.SharedPreferencesUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,6 +42,7 @@ import butterknife.OnClick;
 public class StartActivity extends BaseActivity implements StartView {
 
     public static final String ERROR_CODE = "error_code";
+    public static final int REQUEST_CODE_ESIA_MARKER = 10001;
 
     @BindView(R.id.buttonLogin)
     Button mButtonLogin;
@@ -62,6 +67,9 @@ public class StartActivity extends BaseActivity implements StartView {
     @Inject
     SharedPreferencesUtils mPreferencesUtils;
 
+    @Inject
+    ProgressDialogHelper progressDialogHelper;
+
     @Override
     void doInjections(ActivityComponent activityComponent) {
         activityComponent.inject(this);
@@ -69,12 +77,22 @@ public class StartActivity extends BaseActivity implements StartView {
 
     @Override
     public void showLoad() {
-
+        progressDialogHelper.showNotCancelableDialog();
     }
 
     @Override
     public void hideLoad() {
+        progressDialogHelper.hideDialog();
+    }
 
+    @Override
+    public void errorLoginMsg(String errorMsg) {
+        dialogsHelper.alertDialogErrorMsg(errorMsg);
+    }
+
+    @Override
+    public void onErrorChild(String childErrorMsg) {
+        EventBus.getDefault().postSticky(new ErrorChildEvent(childErrorMsg));
     }
 
     @Override
@@ -115,12 +133,20 @@ public class StartActivity extends BaseActivity implements StartView {
 
     @OnClick(R.id.buttonLogin)
     public void loginClick() {
-//        if (getIntent().hasExtra(ERROR_CODE)) {
-//            navigator.openScreenForResult(LoginActivity.class, RQ_ESIA_MARKER);
-//        } else {
-//            startPresenter.login();
-//        }
-        navigator.openScreen(LoginActivity.class);
+        if (getIntent().hasExtra(ERROR_CODE)) {
+            navigator.openScreenForResult(LoginActivity.class, REQUEST_CODE_ESIA_MARKER);
+        } else {
+            startPresenter.login();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_ESIA_MARKER && resultCode == RESULT_OK){
+            startPresenter.getPatient();
+        }
+
     }
 
     @Override

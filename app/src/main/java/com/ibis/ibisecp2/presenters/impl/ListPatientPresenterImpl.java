@@ -4,6 +4,8 @@ import com.ibis.ibisecp2.helpers.PatientHelper;
 import com.ibis.ibisecp2.model.Patient;
 import com.ibis.ibisecp2.presenters.ListPatientPresenter;
 import com.ibis.ibisecp2.ui.Navigator;
+import com.ibis.ibisecp2.ui.activity.LoginActivity;
+import com.ibis.ibisecp2.ui.activity.StartActivity;
 import com.ibis.ibisecp2.utils.SharedPreferencesUtils;
 
 import java.util.List;
@@ -96,4 +98,8 @@ public class ListPatientPresenterImpl extends ListPatientPresenter {
         navigator.getActivity().finish();
     }
 
+    @Override
+    public void newPatientLogin() {
+        navigator.openScreenForResult(LoginActivity.class, StartActivity.REQUEST_CODE_ESIA_MARKER);
+    }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="@drawable/layout_bg"
     android:orientation="vertical">
 
@@ -17,9 +17,18 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewPatients"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="300dp"
+        android:layout_height="350dp"
         android:layout_margin="@dimen/spacing_major"
         android:orientation="vertical" />
+
+    <Button
+        android:id="@+id/btnAddPatient"
+        style="@style/style_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_margin="@dimen/spacing_minor"
+        android:text="Добавить пациента"
+        android:textColor="@color/white" />
 
 </LinearLayout>

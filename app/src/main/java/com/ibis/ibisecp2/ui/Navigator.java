@@ -417,9 +417,9 @@ public class Navigator {
     }
 
     public void openListPatientFragment() {
-//        FragmentManager fm = getFragmentManager();
-//        ListPatientFragment patientFragment = ListPatientFragment.newInstance();
-//        patientFragment.show(fm, ListPatientFragment.class.getSimpleName());
+        FragmentManager fm = getFragmentManager();
+        ListPatientFragment patientFragment = ListPatientFragment.newInstance();
+        patientFragment.show(fm, ListPatientFragment.class.getSimpleName());
     }
 
     public void openLoginFragment(boolean isError) {

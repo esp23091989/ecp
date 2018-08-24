@@ -1,8 +1,8 @@
 package com.ibis.ibisecp2.ui.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,7 @@ import com.ibis.ibisecp2.helpers.DialogsHelper;
 import com.ibis.ibisecp2.helpers.ProgressDialogHelper;
 import com.ibis.ibisecp2.model.EsiaTokenMarker;
 import com.ibis.ibisecp2.presenters.LoginByEsiaPresenter;
-import com.ibis.ibisecp2.ui.LocalLoginNavigator;
+import com.ibis.ibisecp2.ui.EsiaMarkerReceiveListener;
 import com.ibis.ibisecp2.ui.activity.BaseActivity;
 import com.ibis.ibisecp2.ui.view.LoginByEsiaView;
 import com.ibis.ibisecp2.ui.viewutils.AuthenticatingWebView;
@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 
 public class LoginByEsiaFragment extends BaseFragment implements LoginByEsiaView {
     public static final String TAG = LoginByEsiaFragment.class.getSimpleName();
-    public static final String URL_ESIA = "https://ecp-test.miacugra.ru/esia";
+    public static final String URL_ESIA = " https://ecp-test.miacugra.ru/esia/Account/LoginTest?provider=ESIA";
 
     @BindView(R.id.webView)
     WebView webView;
@@ -43,14 +43,8 @@ public class LoginByEsiaFragment extends BaseFragment implements LoginByEsiaView
     @Inject
     LoginByEsiaPresenter presenter;
 
-    @Inject
-    DialogsHelper dialogsHelper;
-
-    @Inject
-    ProgressDialogHelper progressDialogHelper;
-
     private AuthenticatingWebView authenticatingWebView;
-    private LocalLoginNavigator localLoginNavigator;
+    private EsiaMarkerReceiveListener esiaMarkerReceiveListener;
 
     public static LoginByEsiaFragment newInstance() {
         return new LoginByEsiaFragment();
@@ -94,9 +88,10 @@ public class LoginByEsiaFragment extends BaseFragment implements LoginByEsiaView
 
             @Override
             public void displayResults(EsiaTokenMarker marker) {
+                if(esiaMarkerReceiveListener != null){
+                    esiaMarkerReceiveListener.onEsiaMarkerReceived(marker);
+                }
                 presenter.saveEsiaMarker(marker);
-                presenter.getPatient();
-                Log.d("","");
 
             }
         });
@@ -105,19 +100,12 @@ public class LoginByEsiaFragment extends BaseFragment implements LoginByEsiaView
     }
 
     @Override
-    public void refreshWebView(){
-        authenticatingWebView.makeRequest(URL_ESIA);
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if(context instanceof LocalLoginNavigator) {
-            this.localLoginNavigator = (LocalLoginNavigator) context;
+        if(context instanceof EsiaMarkerReceiveListener) {
+            this.esiaMarkerReceiveListener = (EsiaMarkerReceiveListener) context;
         }
     }
-
-
 
     @Override
     public void showWebLoading() {
@@ -127,42 +115,6 @@ public class LoginByEsiaFragment extends BaseFragment implements LoginByEsiaView
     @Override
     public void hideWebLoading() {
         progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showLoading() {
-        progressDialogHelper.showNotCancelableDialog();
-    }
-
-    @Override
-    public void hideLoading() {
-        progressDialogHelper.hideDialog();
-    }
-
-    @Override
-    public void errorLoginMsg(String e) {
-        authenticatingWebView.makeRequest(URL_ESIA);
-        dialogsHelper.alertDialogErrorMsg(e);
-    }
-
-    @Override
-    public void savePatient() {
-        AndroidUtils.hideKeyboard(this);
-    }
-
-    @Override
-    public void onErrorChild(String text) {
-        EventBus.getDefault().postSticky(new ErrorChildEvent(text));
-    }
-
-    @Override
-    public void openPatientList() {
-        localLoginNavigator.openPatientList(true);
-    }
-
-    @Override
-    public void openMainScreen() {
-        localLoginNavigator.openMainScreen();
     }
 
 }

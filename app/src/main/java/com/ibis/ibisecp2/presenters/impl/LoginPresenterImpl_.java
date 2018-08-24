@@ -1,37 +1,33 @@
 package com.ibis.ibisecp2.presenters.impl;
 
-import android.util.Log;
-
 import com.ibis.ibisecp2.helpers.PatientHelper;
-import com.ibis.ibisecp2.model.Patient;
+import com.ibis.ibisecp2.model.EsiaTokenMarker;
 import com.ibis.ibisecp2.presenters.LoginPresenter_;
 import com.ibis.ibisecp2.ui.Navigator;
-
-import java.util.List;
+import com.ibis.ibisecp2.utils.SharedPreferencesUtils;
 
 import javax.inject.Inject;
-
-import rx.Observer;
 
 public class LoginPresenterImpl_ extends LoginPresenter_{
 
     private final Navigator navigator;
     private final PatientHelper patientHelper;
+    private final SharedPreferencesUtils preferencesUtils;
 
     @Inject
-    public LoginPresenterImpl_(Navigator navigator, PatientHelper patientHelper) {
+    public LoginPresenterImpl_(Navigator navigator, PatientHelper patientHelper, SharedPreferencesUtils preferencesUtils) {
         this.navigator = navigator;
         this.patientHelper = patientHelper;
+        this.preferencesUtils = preferencesUtils;
     }
 
     @Override
-    public void onStart(boolean hasError) {
-        if(!hasError){
-            subscription = patientHelper.getPatientList().subscribe(patients -> {
-                if(isViewAttached() && !patients.isEmpty())
-                    view.openPatientList(false);
-            });
-        }
-//        navigator.openLoginByEsiaFragment();
+    public void onStart() {
+        navigator.openLoginByEsiaFragment();
+    }
+
+    @Override
+    public void saveMarker(EsiaTokenMarker marker) {
+        preferencesUtils.saveEsiaMarker(marker);
     }
 }
