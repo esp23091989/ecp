@@ -73,56 +73,56 @@ public class LoginPresenterImpl extends LoginPresenter {
 
     @Override
     public void login(String login, String password, boolean isSavePass, String type) {
-//        interruptRequest();
-//        subscription = authHelper.auth(login, password, type)
-//                .subscribe(new Observer<AuthResponse>() {
-//                    @Override
-//                    public void onCompleted() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.errorLogin(e);
-//                    }
-//
-//                    @Override
-//                    public void onNext(AuthResponse response) {
-//                        Patient patient = response.getPatient();
-//                        if (patient != null) {
-//                            if (patient.getError() == null) {
-//                                if (patient.getSNILS() != null) {
-//                                    patient = response.getPatient();
-//                                    patient.set_id(Long.parseLong(patient.getSNILS()
-//                                            .replaceAll("-", "").replace(" ", "")));
-//                                    patient.setSNILS(patient.getSNILS().replaceAll("-", "")
-//                                            .replace(" ", ""));
-//                                    preferencesUtils.hasPassword(isSavePass);
-//                                    getPatient(patient);
-//                                } else {
-//                                    view.errorLoginMsg("Чтобы пользоваться приложением необходима как минимум Стандартная учетная запись Госуслуг, в которой СНИЛС должен быть введен и верефицирован.");
-//                                }
-//                            } else {
-//                                view.errorLoginMsg(patient.getError().getErrorText() == null ? "Ошибка авторизации" : patient.getError().getErrorText());
-//                            }
-//                        } else {
-//                            if (response.getError() != null) {
-//                                if (isViewAttached()) {
-//                                    if (response.getError().getCode() == 3) {
-//                                        navigator.openConfirmSmsFragment(login, isSavePass);
-//                                        view.onConfirm();
-//                                        // for new version get child
-//                                    } else if (response.getError().getCode() == -1) {
-//                                        view.errorLoginMsg("Ошибка в данных пользователя. Обратитесь в контакт-центр по тел. 88001008603");
-//                                    } else {
-//                                        view.errorLoginMsg(response.getError().getErrorText());
-//                                    }
-//                                }
-//
-//                            }
-//                        }
-//                    }
-//                });
+        interruptRequest();
+        subscription = authHelper.auth(login, password, type)
+                .subscribe(new Observer<AuthResponse>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.errorLogin(e);
+                    }
+
+                    @Override
+                    public void onNext(AuthResponse response) {
+                        Patient patient = response.getPatient();
+                        if (patient != null) {
+                            if (patient.getError() == null) {
+                                if (patient.getSNILS() != null) {
+                                    patient = response.getPatient();
+                                    patient.set_id(Long.parseLong(patient.getSNILS()
+                                            .replaceAll("-", "").replace(" ", "")));
+                                    patient.setSNILS(patient.getSNILS().replaceAll("-", "")
+                                            .replace(" ", ""));
+                                    preferencesUtils.hasPassword(isSavePass);
+                                    getPatient(patient);
+                                } else {
+                                    view.errorLoginMsg("Чтобы пользоваться приложением необходима как минимум Стандартная учетная запись Госуслуг, в которой СНИЛС должен быть введен и верефицирован.");
+                                }
+                            } else {
+                                view.errorLoginMsg(patient.getError().getErrorText() == null ? "Ошибка авторизации" : patient.getError().getErrorText());
+                            }
+                        } else {
+                            if (response.getError() != null) {
+                                if (isViewAttached()) {
+                                    if (response.getError().getCode() == 3) {
+                                        navigator.openConfirmSmsFragment(login, isSavePass);
+                                        view.onConfirm();
+                                        // for new version get child
+                                    } else if (response.getError().getCode() == -1) {
+                                        view.errorLoginMsg("Ошибка в данных пользователя. Обратитесь в контакт-центр по тел. 88001008603");
+                                    } else {
+                                        view.errorLoginMsg(response.getError().getErrorText());
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                });
     }
 
     private void getPatient(Patient patient1) {

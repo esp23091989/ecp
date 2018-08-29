@@ -28,6 +28,7 @@ import com.ibis.ibisecp2.dagger.HasComponent;
 import com.ibis.ibisecp2.dagger.component.ActivityComponent;
 import com.ibis.ibisecp2.dagger.module.ActivityModule;
 import com.ibis.ibisecp2.events.LocationEvent;
+import com.ibis.ibisecp2.events.LogoutEvent;
 import com.ibis.ibisecp2.events.NotificationEvent;
 import com.ibis.ibisecp2.helpers.DialogsHelper;
 import com.ibis.ibisecp2.ui.Navigator;
@@ -297,6 +298,7 @@ public abstract class BaseActivity extends AppCompatActivity
                 break;
             case R.id.nav_exit:
                 navigator.openScreen(StartActivity.class);
+                EventBus.getDefault().postSticky(new LogoutEvent());
                 preferencesUtils.savePatientId(-1);
                 finish();
                 break;

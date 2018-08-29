@@ -219,18 +219,33 @@ public class StartPresenterImpl extends StartPresenter {
                 .subscribe(new SingleSubscriber<AuthResponse>() {
                     @Override
                     public void onSuccess(AuthResponse authResponse) {
-                        Log.d("","");
                         Patient patient = authResponse.getPatient();
-                        if (patient.getSNILS() != null) {
-                            patient = authResponse.getPatient();
-                            patient.set_id(Long.parseLong(patient.getSNILS()
-                                    .replaceAll("-", "").replace(" ", "")));
-                            patient.setSNILS(patient.getSNILS().replaceAll("-", "")
-                                    .replace(" ", ""));
-                            preferencesUtils.hasPassword(false);
-                            getPatient(patient);
+                        if (patient != null) {
+                            if (patient.getError() == null) {
+                                if (patient.getSNILS() != null) {
+                                    patient = authResponse.getPatient();
+                                    patient.set_id(Long.parseLong(patient.getSNILS()
+                                            .replaceAll("-", "").replace(" ", "")));
+                                    patient.setSNILS(patient.getSNILS().replaceAll("-", "")
+                                            .replace(" ", ""));
+                                    getPatient(patient);
+                                } else {
+                                    view.errorLoginMsg("Чтобы пользоваться приложением необходима как минимум Стандартная учетная запись Госуслуг, в которой СНИЛС должен быть введен и верефицирован.");
+                                }
+                            } else {
+                                view.errorLoginMsg(patient.getError().getErrorText() == null ? "Ошибка авторизации" : patient.getError().getErrorText());
+                            }
                         } else {
-                            view.errorLoginMsg("Чтобы пользоваться приложением необходима как минимум Стандартная учетная запись Госуслуг, в которой СНИЛС должен быть введен и верефицирован.");
+                            if (authResponse.getError() != null) {
+                                if (isViewAttached()) {
+                                    if (authResponse.getError().getCode() == -1) {
+                                        view.errorLoginMsg("Ошибка в данных пользователя. Обратитесь в контакт-центр по тел. 88001008603");
+                                    } else {
+                                        view.errorLoginMsg(authResponse.getError().getErrorText());
+                                    }
+                                }
+
+                            }
                         }
                     }
 
@@ -352,7 +367,7 @@ public class StartPresenterImpl extends StartPresenter {
                 child = "детей:";
             }
 
-//            if(!warnMsg.equals(""))
+            if(!warnMsg.equals(""))
                 view.onErrorChild("Ошибка в данных " + child + warnMsg
                         + ".\n\nОбратитесь в контакт-центр по тел. 88001008603");
         }

@@ -19,7 +19,9 @@ import com.ibis.ibisecp2.EcpApplication;
 import com.ibis.ibisecp2.R;
 import com.ibis.ibisecp2.adapter.SpinnerAdapter;
 import com.ibis.ibisecp2.dagger.component.ActivityComponent;
+import com.ibis.ibisecp2.events.CancelVisit;
 import com.ibis.ibisecp2.events.ErrorChildEvent;
+import com.ibis.ibisecp2.events.LogoutEvent;
 import com.ibis.ibisecp2.helpers.DialogsHelper;
 import com.ibis.ibisecp2.helpers.ProgressDialogHelper;
 import com.ibis.ibisecp2.model.Patient;
@@ -29,6 +31,7 @@ import com.ibis.ibisecp2.ui.view.StartView;
 import com.ibis.ibisecp2.utils.SharedPreferencesUtils;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Arrays;
 import java.util.List;
@@ -126,6 +129,22 @@ public class StartActivity extends BaseActivity implements StartView {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         startPresenter.detachView();
         super.onDestroy();
@@ -206,4 +225,11 @@ public class StartActivity extends BaseActivity implements StartView {
             }
         });
     }
+
+    @Subscribe(sticky = true)
+    public void onLogoutEvent(LogoutEvent event) {
+        EventBus.getDefault().removeStickyEvent(event);
+        navigator.openListPatientFragment();
+    }
+
 }
