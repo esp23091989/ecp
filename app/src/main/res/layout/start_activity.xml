@@ -41,12 +41,13 @@
         <Button
             android:id="@+id/buttonLogin"
             style="@style/style_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="48dp"
-            android:layout_alignBottom="@+id/fab"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="@dimen/spacing_major"
-            android:text="Вход" />
+            android:layout_marginRight="16dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:text="ВХОД ЧЕРЕЗ ГОСУСЛУГИ" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabInfo"

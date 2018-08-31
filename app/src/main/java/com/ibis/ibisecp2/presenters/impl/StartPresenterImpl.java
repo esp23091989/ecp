@@ -208,7 +208,7 @@ public class StartPresenterImpl extends StartPresenter {
     }
 
     @Override
-    public void getPatient() {
+    public void auth() {
         EsiaTokenMarker marker = preferencesUtils.getEsiaMarker();
         subscription = authHelper.auth(marker)
                 .compose(rxUtil.schedulers())

@@ -9,9 +9,13 @@ import android.widget.TextView;
 
 import com.ibis.ibisecp2.R;
 import com.ibis.ibisecp2.dagger.component.ActivityComponent;
+import com.ibis.ibisecp2.events.ErrorChildEvent;
 import com.ibis.ibisecp2.model.Patient;
 import com.ibis.ibisecp2.presenters.MainPresenter;
 import com.ibis.ibisecp2.ui.view.MainView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Inject;
 
@@ -61,6 +65,22 @@ public class MainActivity extends BaseActivity implements MainView {
         setupDrawer();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
     private void openMainMenu() {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -88,5 +108,11 @@ public class MainActivity extends BaseActivity implements MainView {
     public void showPatient(Patient patient) {
         tvHi.setText(String.format("Рады приветствовать Вас,\n%s %s!", patient.getFirstName(),
                 patient.getMiddleName()));
+    }
+
+    @Subscribe(sticky = true)
+    public void onErrorChildEvent(ErrorChildEvent event) {
+        EventBus.getDefault().removeStickyEvent(event);
+        dialogsHelper.alertDialogErrorMsg(event.getError());
     }
 }

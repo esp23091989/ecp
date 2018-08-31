@@ -7,6 +7,7 @@ import com.ibis.ibisecp2.model.CurrentTime;
 import com.ibis.ibisecp2.model.DiaryRecordsResponse;
 import com.ibis.ibisecp2.model.DoctorResponse;
 import com.ibis.ibisecp2.model.ErrorResponse;
+import com.ibis.ibisecp2.model.EsiaTokenMarker;
 import com.ibis.ibisecp2.model.ItemResponse;
 import com.ibis.ibisecp2.model.MedicamentResponse;
 import com.ibis.ibisecp2.model.Protocol;
@@ -31,7 +32,7 @@ import rx.Single;
 public interface EcpAp {
     //    @FormUrlEncoded
     @POST("Auth")
-    Single<AuthResponse> auth(@Body UserInfoDTO userInfoDTO);
+    Single<AuthResponse> auth(@Body EsiaTokenMarker esiaTokenMarker);
 
     @POST("GetTime")
     Observable<CurrentTime> getTime();

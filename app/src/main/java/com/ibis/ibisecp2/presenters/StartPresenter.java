@@ -29,5 +29,5 @@ public abstract class StartPresenter extends BasePresenter<StartView> {
 
     public abstract void interruptRequest();
 
-    public abstract void getPatient();
+    public abstract void auth();
 }

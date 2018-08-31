@@ -78,13 +78,12 @@ public class AuthHelperImpl implements AuthHelper {
 //                authResponseZipper::transform
 //        ).toSingle();
 
-        return esiaApi.getAllUserInfo(marker.getSbjId())
-                .flatMap(userInfoDTO -> {
-                    Log.d("","");
-                    return api.auth(userInfoDTO);
-                });
-
-
+        return api.auth(marker);
+//        return esiaApi.getAllUserInfo(marker.getSbjId())
+//                .flatMap(userInfoDTO -> {
+//                    Log.d("","");
+//                    return api.auth(userInfoDTO);
+//                });
     }
 
 

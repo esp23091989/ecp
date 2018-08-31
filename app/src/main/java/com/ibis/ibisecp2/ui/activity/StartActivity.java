@@ -163,7 +163,7 @@ public class StartActivity extends BaseActivity implements StartView {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE_ESIA_MARKER && resultCode == RESULT_OK){
-            startPresenter.getPatient();
+            startPresenter.auth();
         }
 
     }
