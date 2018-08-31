@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,7 +19,6 @@ import com.ibis.ibisecp2.EcpApplication;
 import com.ibis.ibisecp2.R;
 import com.ibis.ibisecp2.adapter.SpinnerAdapter;
 import com.ibis.ibisecp2.dagger.component.ActivityComponent;
-import com.ibis.ibisecp2.events.CancelVisit;
 import com.ibis.ibisecp2.events.ErrorChildEvent;
 import com.ibis.ibisecp2.events.LogoutEvent;
 import com.ibis.ibisecp2.helpers.DialogsHelper;
@@ -52,9 +51,9 @@ public class StartActivity extends BaseActivity implements StartView {
     @BindView(R.id.departmentTextView)
     TextView departmentTextView;
     @BindView(R.id.fab)
-    FloatingActionButton fab;
+    AppCompatImageButton fab;
     @BindView(R.id.fabInfo)
-    FloatingActionButton fabInfo;
+    AppCompatImageButton fabInfo;
     @BindView(R.id.spinner)
     AppCompatSpinner mSpinner;
     @Inject

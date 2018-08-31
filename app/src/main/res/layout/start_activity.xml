@@ -22,39 +22,46 @@
         android:textSize="@dimen/header_department_font_size"
         android:typeface="sans" />
 
+    <Button
+        android:id="@+id/buttonLogin"
+        style="@style/style_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:layout_above="@+id/linearLayout"
+        android:text="ВХОД ЧЕРЕЗ ГОСУСЛУГИ" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/spacing_minor"
+        android:layout_marginTop="@dimen/spacing_minor"
         android:gravity="center"
         android:orientation="horizontal"
         android:id="@+id/linearLayout">
 
-        <android.support.design.widget.FloatingActionButton
+        <ImageButton
             android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/spacing_major"
-            android:src="@drawable/tel_white_3" />
-
-        <Button
-            android:id="@+id/buttonLogin"
-            style="@style/style_button"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="48dp"
-            android:layout_marginRight="16dp"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:text="ВХОД ЧЕРЕЗ ГОСУСЛУГИ" />
+            android:scaleType="fitCenter"
+            android:padding="8dp"
+            android:layout_marginRight="@dimen/spacing_major"
+            android:src="@drawable/tel_white_3"
+            style="@style/style_button"
+            />
 
-        <android.support.design.widget.FloatingActionButton
+        <ImageButton
             android:id="@+id/fabInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
             android:scaleType="center"
-            android:src="@drawable/ic_information_outline_white_48dp" />
+            android:src="@drawable/ic_information_outline_white_48dp"
+            style="@style/style_button"
+            />
     </LinearLayout>
 
     <android.support.v7.widget.AppCompatSpinner
