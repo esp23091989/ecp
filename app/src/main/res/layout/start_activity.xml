@@ -29,6 +29,8 @@
         android:layout_height="48dp"
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:layout_above="@+id/linearLayout"
         android:text="ВХОД ЧЕРЕЗ ГОСУСЛУГИ" />
 
