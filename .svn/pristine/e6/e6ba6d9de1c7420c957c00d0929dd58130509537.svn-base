@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemGridSchedule"
+    android:layout_width="wrap_content"
+    android:layout_height="48dp"
+    android:layout_marginBottom="2dp"
+    android:background="@drawable/mono_light_green_button_background"
+    android:elevation="2dp"
+    android:gravity="center"
+    android:minWidth="48dp"
+    android:padding="@dimen/spacing_tiny"
+    android:textColor="@color/textSecondaryPrimary"
+    android:textSize="14sp" />

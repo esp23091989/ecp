@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragmentTicketLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <ScrollView
+        android:id="@+id/diaryTicketLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <LinearLayout
+                android:id="@+id/diaryTicketViewLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="@dimen/vertical_button_margin"
+                android:background="@drawable/ticket_border"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/spacing_major"
+                android:paddingRight="@dimen/spacing_major"
+                android:paddingTop="@dimen/activity_vertical_margin">
+
+                <TextView
+                    android:id="@+id/diaryTicketNumTitleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_tiny"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/header_font_size"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/tvDiaryTicketMo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/header_font_size" />
+
+                <TextView
+                    android:id="@+id/diaryTicketAdressMoTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="diaryTicketAdressMoTextView"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/diaryTicketSpecialityTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_minor"
+                    android:text="diaryTicketSpecialityTextView"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/diaryTicketDoctorFullNameTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="diaryTicketDoctorFullNameTextView"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/header_font_size" />
+
+
+                <TextView
+                    android:id="@+id/diaryTicketDateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_minor"
+                    android:text="diaryTicketDateTextView"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/header_font_size" />
+
+                <TextView
+                    android:id="@+id/diaryFioPatientTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:text="diaryFioPatientTextView"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvSource"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_minor"
+                    android:text="diaryFioPatientTextView"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="diaryFioPatientTextView"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/showDiaryTicketListButton"
+                android:layout_width="48dp"
+                android:layout_height="45dp"
+                android:layout_below="@+id/diaryTicketViewLayout"
+                android:background="@drawable/button_bg"
+                android:src="@drawable/ic_chevron_left_white_36dp"
+                android:text="@string/title.appointment.tickets" />
+
+            <Button
+                android:id="@+id/deleteDiaryTicketButton"
+                style="@style/style_button"
+                android:layout_below="@+id/diaryTicketViewLayout"
+                android:layout_marginLeft="@dimen/spacing_minor"
+                android:layout_toRightOf="@+id/showDiaryTicketListButton"
+                android:text="Отменить прием" />
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

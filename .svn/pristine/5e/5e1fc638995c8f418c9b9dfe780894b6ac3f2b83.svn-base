@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/spacing_major"
+    android:background="@drawable/layout_bg"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    app:theme="@style/AppTheme">
+
+    <TextView
+        android:id="@+id/tvTitleConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/spacing_minor"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:gravity="center"
+        android:text="Введите код подтверждения из \nSMS-сообщения"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_cod"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:background="@drawable/rounded_edit_text"
+        android:padding="@dimen/spacing_tiny">
+
+        <EditText
+            android:id="@+id/etCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/til_login"
+            android:hint="@string/authorize.code"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <include layout="@layout/progress" />
+
+    <!--<TextView-->
+    <!--android:id="@+id/tvTryCode"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginBottom="@dimen/spacing_major"-->
+    <!--android:layout_marginTop="@dimen/spacing_major"-->
+    <!--android:gravity="center"-->
+    <!--android:text="Неверный код. Введите заново"-->
+    <!--android:textColor="@color/red"-->
+    <!--android:textSize="14sp" />-->
+
+    <Button
+        android:id="@+id/btnInputCode"
+        style="@style/style_button"
+        android:layout_marginTop="@dimen/spacing_major"
+        android:text="Продолжить" />
+
+    <TextView
+        android:id="@+id/tvTimeCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/spacing_major"
+        android:layout_marginTop="@dimen/spacing_major"
+        android:gravity="center"
+        android:text="Код действителен еще 140 секунд"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+</LinearLayout>

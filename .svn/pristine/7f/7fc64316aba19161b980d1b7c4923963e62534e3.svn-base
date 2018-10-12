@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llGroupHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey"
+    android:gravity="center"
+    android:minHeight="48dp"
+    android:orientation="horizontal"
+    android:paddingLeft="30dp"
+    android:paddingRight="@dimen/spacing_medium"
+    android:visibility="visible"
+    android:weightSum="5">
+
+    <!--<TextView-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Дата начала лечения"-->
+    <!--android:gravity="center"-->
+    <!--android:id="@+id/tvStartDateSluch" />-->
+
+    <TextView
+        android:id="@+id/tvEndDateSluch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Дата окончания"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tvSluch"
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_weight="3"
+        android:text="Случай/Наименование услуг"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tvCostSluch"
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+
+        android:text="цена/кол-во услуг"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+</LinearLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemDialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="1dp"
+    android:background="@drawable/mono_light_green_button_background"
+    android:gravity="center_vertical"
+    android:minHeight="48dp"
+    android:paddingLeft="@dimen/spacing_tiny" />

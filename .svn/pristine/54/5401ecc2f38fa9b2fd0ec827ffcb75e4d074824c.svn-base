@@ -4,25 +4,20 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.ibis.ibisecp2.BuildConfig;
-import com.ibis.ibisecp2.model.EsiaTokenMarker;
 import com.ibis.ibisecp2.retrofit.ApiEsia;
 import com.ibis.ibisecp2.retrofit.EcpAp;
-import com.ibis.ibisecp2.retrofit.EsiaApi;
 import com.ibis.ibisecp2.retrofit.MedvedApi;
 import com.ibis.ibisecp2.retrofit.TLSSocketFactory;
 import com.ibis.ibisecp2.utils.SharedPreferencesUtils;
 
-import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import javax.net.SocketFactory;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -33,10 +28,7 @@ import javax.net.ssl.X509TrustManager;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -51,12 +43,11 @@ public class ApiModule {
     private final static String BASE_URL_MEDVED = "https://medved-webservices.hostco.ru/DLORecipeService/services/recipeService/";
     private static final String BASE_URL_ECP_TEST = "http://ecp.miacugra.ru:8008/AndroidService.svc/";
     private static final String BASE_URL_ECP_PROD = "http://ecp.miacugra.ru/AndroidService.svc/";
-    private static final String BASE_URL_ECP_PROD_v2 = "https://prenatal.miacugra.ru/";
+    private static final String BASE_URL_ECP_PROD_v2 = "https://ecp.miacugra.ru/";
     private static final String BASE_URL_ECP_HTTPS = "https://192.168.1.41/";
     private static final String BASE_URL_TEST = "http://95.174.103.205:18000/";
-    private static final String BASE_URL_TESTS = "http://tgn.oblteh.ru:10081/IbisECPService/";
+    private static final String BASE_URL_TESTS = "https://ecp-test.oblteh.ru/";
     private static final String BASE_URL_MIAC = "https://ecp-test.miacugra.ru/";
-    private static final String BASE_URL_ESIA = "https://esia-portal1.test.gosuslugi.ru/";
 
     @Provides
     @Singleton
@@ -72,51 +63,6 @@ public class ApiModule {
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .build();
-    }
-
-    @Provides
-    @Singleton
-    @Inject
-    @Named("EsiaOkHttpClient")
-    public OkHttpClient provideEsiaOkHttpClient(SharedPreferencesUtils sharedPreferencesUtils){
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
-
-        clientBuilder.addNetworkInterceptor(interceptor);
-        clientBuilder.addInterceptor(chain -> {
-            Request request = chain.request();
-            EsiaTokenMarker esiaTokenMarker = sharedPreferencesUtils.getEsiaMarker();
-
-            Request.Builder requestBuilder = request.newBuilder()
-                    .header("Authorization", "Bearer " + esiaTokenMarker.getAccessToken());
-            return chain.proceed(requestBuilder.build());
-        });
-
-        try {
-            clientBuilder.sslSocketFactory((SSLSocketFactory) SSLSocketFactory.getDefault(), new X509TrustManager() {
-                @Override
-                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-
-                }
-
-                @Override
-                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-
-                }
-
-                @Override
-                public X509Certificate[] getAcceptedIssuers() {
-                    return new java.security.cert.X509Certificate[]{};
-                }
-            });
-            clientBuilder.hostnameVerifier((hostname, session) -> true);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        return clientBuilder.build();
     }
 
     @Provides
@@ -186,14 +132,6 @@ public class ApiModule {
     @Provides
     @Singleton
     @Inject
-    @Named("EsiaRetrofitClient")
-    public Retrofit provideEsiaRetrofit(@Named("EsiaOkHttpClient") OkHttpClient okHttpClient){
-        return getRetrofit(okHttpClient, BASE_URL_ESIA);
-    }
-
-    @Provides
-    @Singleton
-    @Inject
     @Named("MedvedClient")
     public Retrofit provideMedvedRetrofit(@Named("OkHttpClient") OkHttpClient okHttpClient) {
         return getRetrofit(okHttpClient, BASE_URL_MEDVED);
@@ -248,13 +186,6 @@ public class ApiModule {
     @Inject
     public EcpAp provideEcpAp(@Named("EcpClient") Retrofit adapter) {
         return adapter.create(EcpAp.class);
-    }
-
-    @Provides
-    @Singleton
-    @Inject
-    public EsiaApi provideEsiaApi(@Named("EsiaRetrofitClient") Retrofit adpter){
-        return adpter.create(EsiaApi.class);
     }
 
 
