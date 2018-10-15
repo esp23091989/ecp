@@ -51,12 +51,12 @@ public class ApiModule {
     private final static String BASE_URL_MEDVED = "https://medved-webservices.hostco.ru/DLORecipeService/services/recipeService/";
     private static final String BASE_URL_ECP_TEST = "http://ecp.miacugra.ru:8008/AndroidService.svc/";
     private static final String BASE_URL_ECP_PROD = "http://ecp.miacugra.ru/AndroidService.svc/";
-    private static final String BASE_URL_ECP_PROD_v2 = "https://prenatal.miacugra.ru/";
+    private static final String BASE_URL_ECP_PROD_v2 = "https://ecp.miacugra.ru/";
     private static final String BASE_URL_ECP_HTTPS = "https://192.168.1.41/";
     private static final String BASE_URL_TEST = "http://95.174.103.205:18000/";
     private static final String BASE_URL_TESTS = "http://tgn.oblteh.ru:10081/IbisECPService/";
     private static final String BASE_URL_MIAC = "https://ecp-test.miacugra.ru/";
-    private static final String BASE_URL_ESIA = "https://esia-portal1.test.gosuslugi.ru/";
+    private static final String BASE_URL_ESIA = "https://esia.gosuslugi.ru/";
 
     @Provides
     @Singleton

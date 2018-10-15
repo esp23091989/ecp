@@ -6,13 +6,13 @@ repositories {
 }
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.2'
     defaultConfig {
         applicationId 'com.ibis.ibisecp2'
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 65
-        versionName "23.2"
+        versionCode 66
+        versionName "23.3"
     }
     buildTypes {
         release {

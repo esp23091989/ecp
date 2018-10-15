@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 
 public class LoginByEsiaFragment extends BaseFragment implements LoginByEsiaView {
     public static final String TAG = LoginByEsiaFragment.class.getSimpleName();
-    public static final String URL_ESIA = " https://ecp-test.miacugra.ru/esia/Account/LoginTest?provider=ESIA";
+    public static final String URL_ESIA = "https://ecp.miacugra.ru/esia/Account/LoginTest?provider=ESIA";
 
     @BindView(R.id.webView)
     WebView webView;
