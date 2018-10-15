@@ -160,7 +160,7 @@
     <string name="error_message_504">Сервер работает, но запрос не может обслуживаться из-за некоторого сбоя во внутреннем стеке. Попробуйте позже.</string>
     <string name="error_message_409">Запрос не может быть выполнен из-за конфликтного обращения к ресурсу</string>
     <string name="error_message_404">Конечная точка не найдена. Попробуйте позже.</string>
-    <string name="notification_error_ssl_cert_invalid">У Вас возникла SSl ошибка. Желаете ли Вы продолжить</string>
+    <string name="notification_error_ssl_cert_invalid">У Вас возникла SSl ошибка. Желаете ли Вы продолжить?</string>
 
 
     <string-array name="urls">
