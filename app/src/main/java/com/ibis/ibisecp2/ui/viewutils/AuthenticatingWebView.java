@@ -14,9 +14,11 @@ package com.ibis.ibisecp2.ui.viewutils;
  ******************************************************************************/
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.SslErrorHandler;
@@ -25,6 +27,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 
+import com.ibis.ibisecp2.R;
 import com.ibis.ibisecp2.model.EsiaTokenMarker;
 
 import java.util.HashMap;
@@ -114,7 +117,12 @@ public class AuthenticatingWebView {
 
         @Override
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-            handler.proceed();
+            final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            builder.setMessage(R.string.notification_error_ssl_cert_invalid);
+            builder.setPositiveButton("продолжить", (dialog, which) -> handler.proceed());
+            builder.setNegativeButton("отменить", (dialog, which) -> handler.cancel());
+            final AlertDialog dialog = builder.create();
+            dialog.show();
         }
 
         @Override
