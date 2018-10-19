@@ -120,12 +120,7 @@ public class AuthenticatingWebView {
             if(error.getPrimaryError() == SslError.SSL_UNTRUSTED )
                 handler.proceed();
             else {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setMessage(R.string.notification_error_ssl_cert_invalid);
-                builder.setPositiveButton("продолжить", (dialog, which) -> handler.proceed());
-                builder.setNegativeButton("отменить", (dialog, which) -> handler.cancel());
-                final AlertDialog dialog = builder.create();
-                dialog.show();
+                handler.cancel();
             }
         }
 
