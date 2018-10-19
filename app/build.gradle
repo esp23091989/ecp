@@ -11,8 +11,8 @@ android {
         applicationId 'com.ibis.ibisecp2'
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 66
-        versionName "23.3"
+        versionCode 67
+        versionName "23.4"
     }
     buildTypes {
         release {
